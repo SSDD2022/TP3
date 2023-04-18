@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Cerámica</title>
-</head>
+{% extends 'taller/base.html' %}
+
+{% block title %}Taller{% endblock %}
 <body>
     <h2>Taller de Cerámica</h2>
     <h3>Página principal  ({{pagina}})</h3>
+    {% block header %}
+        <h1>TALLER DE CERÁMICA</h1>
+        <h3>Página principal  ({{pagina}})</h3>
+    {% endblock %}
+
+    {% block content %}
+        <section>
+            <h4>Novedades</h4>
+        </section>
+    {% endblock %}
 </body>
 </html>

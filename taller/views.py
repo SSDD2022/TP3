@@ -5,4 +5,11 @@ def index(request):
     context = { 'pagina' : 'taller\index.html',
               }
     return render(request,"taller\index.html",context)
-# Prueba
+
+def galeria(request):
+    context = {}
+    return render(request,"taller\galeria.html",context)
+
+def cursos(request):
+    context = {}
+    return render(request,"taller\cursos.html",context)
