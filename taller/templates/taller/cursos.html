@@ -1,25 +1,24 @@
 {% extends 'taller/base.html' %}
+{% load static %}
 
 {% block title %}Cursos{% endblock %}
 
-<body>
-    {% block header %}
-        <h1>CURSOS</h1>
-        <h3>Aca van los cursos disponible para hacer</h3>
-    {% endblock %}
+{% block header %}
+    <h1>Cursos y talleres</h1>
+    <h3>Para todas las edades y niveles, te podes sumar en cualquier momento del año</h3>
+{% endblock %}
 
-    {% block content %}
-        <div>
-            <h4>CURSO 1</h4>
-            <button>Inscribirme!</button>
-        </div>
-        <div>
-            <h4>CURSO 2</h4>
-            <button>Inscribirme!</button>
-        </div>
-        <div>
-            <h4>CURSO 3</h4>
-            <button>Inscribirme!</button>
-        </div>
-    {% endblock %}
-</body>
+{% block content %}
+    {% for curso in cursos %}
+    <div>
+        <h4>{{curso.titulo}}</h4>
+        <p>{{curso.descripcion}}</p>
+        <!-- <img src="{% static 'taller\img\curso-alfareria_adultos9.png' %}" alt="curso"> -->
+        <img src="{% static curso.imagen %}" alt="curso">
+        <br>
+        <button>Inscribirme!</button>
+        <br>
+        <br>
+    </div>
+    {% endfor %}
+{% endblock %}
