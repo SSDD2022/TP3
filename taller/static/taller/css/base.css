@@ -1,3 +1,16 @@
-body {
-background-color: darkgoldenrod;
+
+
+
+
+/* Inicio footer */
+
+footer {
+    border:3px red solid;
+    text-align: center ;
+    margin: 0.5rem;
+}
+article {
+    border:3px green solid;
+    height: auto;
+    margin: 0.5rem;
 }

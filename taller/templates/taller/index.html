@@ -1,17 +1,28 @@
 {% extends 'taller/base.html' %}
+{% load static %}
+
+{% block extra_css %} 
+    <link rel="stylesheet" href="{% static 'taller/css/index.css' %}">
+{% endblock %}
 
 {% block title %}Taller{% endblock %}
 <body>
     <h2>Taller de Cerámica</h2>
-    <h3>Página principal  ({{pagina}})</h3>
-    {% block header %}
-        <h1>TALLER DE CERÁMICA</h1>
-        <h3>Página principal  ({{pagina}})</h3>
+     {% block header %}
+        
+        <div class="header">
+                <h2>TALLER DE CERÁMICA</h2>
+                <h3>Página principal  ({{pagina}})</h3>  
+        </div>
+
     {% endblock %}
 
     {% block content %}
-        <section>
-            <h4>Novedades</h4>
+        <section class="contenido-main">
+            <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit qui aperiam assumenda. Odio obcaecati, quis nostrum dolore eius fugit sequi provident, earum, placeat cum nam atque quasi veniam accusamus culpa.S</h4>
+            <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit qui aperiam assumenda. Odio obcaecati, quis nostrum dolore eius fugit sequi provident, earum, placeat cum nam atque quasi veniam accusamus culpa.S</h4>
+            <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit qui aperiam assumenda. Odio obcaecati, quis nostrum dolore eius fugit sequi provident, earum, placeat cum nam atque quasi veniam accusamus culpa.S</h4>
+       
         </section>
     {% endblock %}
 </body>
