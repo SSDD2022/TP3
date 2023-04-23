@@ -2,23 +2,167 @@
 {% load static %}
 
 {% block title %}Cursos{% endblock %}
+{% block head %}
+    <style>
+        .accordion {
+          background-color: #D3D3D3; /* #e0dfdf; */
+          color: #444; 
+          cursor: pointer;
+          padding: 0.8%;
+          padding-left: 1.2%;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: medium;
+          /* transition: 0.4s; */
+          font-weight: bold;
+        }
+        
+        .active, .accordion:hover {
+          background-color: #A9A9A9; 
+        }
+        
+        .accordion:after {
+          content: '\002B';
+          color: #777;
+          font-weight: bold;
+          float: left; /*right;*/
+          margin-right: 1%;
+        }
+        
+        .active:after {
+          content: "\2212";
+        }
+        
+        .panel {
+          padding: 0 2.5%;
+          background-color: white;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.2s ease-out;
+          font-weight: lighter;
+        }
+        .en_linea {
+          display: inline;
+        }
+        .destacado {
+          padding: 0.5%;
+          font-weight: bold;
+          border-radius: 0.3rem;
+          border: none;
+        }
+        .con_vacantes {
+          background-color: lightgreen;
+          color: green;
+        }
+        .sin_vacantes {
+          background-color: rgb(144, 224, 238);
+          color: blue;
+        }
+        .col-centered {
+          float: none;
+          margin-right: auto;
+          margin-left: auto;
+        }
+.main-container {
+  display: grid;
+  grid-template-columns: 14% 84%;
+  grid-template-rows: auto;
+  grid-template-areas: "img-area det-area"
+                       "btn-area btn-area";
+  grid-auto-flow: row;
+  grid-row-gap: 0.3rem;
+  grid-column-gap: 0.3rem;
+  width: 98%;
+  margin-top: 4rem;
+  margin-bottom: 0;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border-color: red;
+  border-style:ridge;
+}
+.img-container {
+  grid-area: img-area;
+  /* padding: 1.4rem; */
+  text-align: start; 
+  border-color: black;
+  border-style:ridge;
+}
+.det-container {
+  grid-area: det-area;
+  /* padding: 1.4rem; */
+  text-align: start; 
+  border-color: green;
+  border-style:ridge;
+}
+.btn-container {
+  grid-area: btn-area;
+  /* padding: 1.4rem; */
+  text-align: start; 
+  border-color: yellow;
+  border-style:ridge;
+}
+
+
+
+    </style>
+{% endblock %}
 
 {% block header %}
-    <h1>Cursos y talleres</h1>
-    <h3>Para todas las edades y niveles, te podes sumar en cualquier momento del año</h3>
+      <h1>Cursos y talleres</h1>
+      <h3>Para todas las edades y niveles, te podes sumar en cualquier momento del año</h3>
 {% endblock %}
 
 {% block content %}
     {% for curso in cursos %}
-    <div>
-        <h4>{{curso.titulo}}</h4>
-        <p>{{curso.descripcion}}</p>
-        <!-- <img src="{% static 'taller\img\curso-alfareria_adultos9.png' %}" alt="curso"> -->
-        <img src="{% static curso.imagen %}" alt="curso">
-        <br>
-        <button>Inscribirme!</button>
-        <br>
-        <br>
-    </div>
+      <div>
+          <button class="accordion">{{curso.titulo}}</button>
+          <div class="panel row">  <!-- justify-content-center -->
+            <div class="col-md-2">
+              <!-- <img src="{% static 'taller\img\curso-alfareria_adultos9.png' %}" alt="curso"> -->
+              <img src="{% static curso.imagen %}" alt="curso">
+            </div>
+            <div class="cold-md-10">
+              <br>
+              {% for desc in curso.descripcion %}
+                <p>{{desc}}</p>
+              {% endfor %}
+            </div>
+            <br>
+            <div class="col-md-12">
+              {% if curso.cupo %}
+                <button class="destacado con_vacantes">Vacantes disponibles - Inscribite !</button>
+              {% else %}
+                <button class="destacado sin_vacantes">Contactanos si es de tu interés</button>            
+              {% endif %}
+            </div>
+            <br>
+          </div>
+      </div>
     {% endfor %}
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
+        }
+
+
+        </script>
 {% endblock %}
+
+
+  
+
+ 
