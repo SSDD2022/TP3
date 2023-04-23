@@ -34,7 +34,8 @@ def cursos(request):
     c3 = classes.Curso('Alfarería',
                ['Las piezas realizadas en el torno comúnmente son concluidas manualmente, permitiendo todo tipo de intervención.',
                 'También esta técnica permite lograr una producción artesanal en serie',
-                'Dirigido a adultos.'
+                'Taller dirigido a adultos.',
+                'Variedad de días y horarios'
                ],
                'ADULTO',
                'taller\img\curso-alfareria_adultos9.png',
@@ -53,6 +54,7 @@ def cursos(request):
                 'Realizaban vasijas, utensilios y recipientes en general, instrumentos musicales, máscaras, juguetes, esculturas, entre otras.',
                 'Se destaca la representación de la naturaleza y la veneración a los dioses.',
                 'Junto con figuras hechas en arcilla terracota que solían representar a mujeres y aludían a los ritos de la fertilidad.',
+                'Curso anual teórico y práctico.'
                ],
                'ADULTO',
                'taller\img\curso-arte_precolombino.jpg',
