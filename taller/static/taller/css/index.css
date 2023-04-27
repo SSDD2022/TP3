@@ -1,14 +1,4 @@
-header{
-    border: 3px blue solid;
-    height: 8em;
-    text-align: center;
-    margin: 0.5em;
-    
-}
-
-
 .contenido-main{
-   /* background-image:url('../img/taller.jpg');*/
     height: 25em;
     width: 100%;
     border:3px red ;

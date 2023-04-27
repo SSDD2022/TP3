@@ -1,6 +1,29 @@
 
+.contenido-foot{
+    display: flex;
+    justify-content: space-around;
+}
+.nav-bar{
+    border: black 3px solid;
+    height: 2.5em;
+    padding-top: 0.4em;
+    font-size: 2em;
+    
+}
+.nav-bar nav ul{
+    display: flex;
+    justify-content: space-around;
+    
+}
 
+#navInicio ul li{
+    list-style: none;
 
+}
+#navInicio ul li a{
+    text-decoration: none;
+    
+}
 
 /* Inicio footer */
 
