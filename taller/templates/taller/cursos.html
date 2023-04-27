@@ -79,17 +79,20 @@
         }
         .det-container {
           grid-area: det-area;
-          /* padding: 1.4rem; */
           align-content: center;
           text-align: start; 
+          padding-top:0.5%;
+          /* line-height: normal; */
           /* border: 1px solid rgba(25, 207, 64, 0.8); */
         }
         .descripcion {
           /* display: flex; */
           padding-left: 0.8%;
-          padding-top: 0.5%;
-          align-content: center;
-          place-self: center;
+          /* padding-top: 0;
+          padding-bottom: 0; */
+          /* align-content: center; */
+          /* place-self: center; */
+          line-height: 100%; /*100%;*/
         }
         .btn-container {
           grid-area: btn-area;
@@ -138,7 +141,9 @@
         <div class="accordion-item estilo-item">
           <h2 class="accordion-header" id={{curso.visual.fheadingX}}>
             <button class="accordion-button collapsed estilo-button" type="button" data-bs-toggle="collapse" data-bs-target={{curso.visual.fcollapseCX}} aria-expanded="false" aria-controls={{curos.visual.fcollapseX}}>
+              {% filter upper %}
               {{curso.titulo}}
+              {% endfilter %}
             </button>
           </h2>
           <div id={{curso.visual.fcollapseX}} class="accordion-collapse collapse" aria-labelledby={{curso.visual.fheadingX}} data-bs-parent="#accordionFlushExample" >

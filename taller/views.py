@@ -15,7 +15,7 @@ def cursos(request):
     v1 = classes.Visual ("flush-headingOne","#flush-collapseOne","flush-collapseOne")
     c1 = classes.Curso(1, 'Cerámica para niños',
                 ['El arte tiene importantes beneficios para los niños, jugando comparten y aprenden valores como el esfuerzo y la dedicación.',
-                 'Mejora de la comunicación, pueden expresarse mediante sus obras.',
+                 'Mejora la comunicación, pueden expresarse mediante sus obras.',
                  'Impulsa la creatividad e imaginación.',
                  'Incrementan su concentración, percepción y coordinación.'
                 ],
@@ -37,8 +37,8 @@ def cursos(request):
                v2)
     v3 = classes.Visual ("flush-headingThree","#flush-collapseThree","flush-collapseThree")
     c3 = classes.Curso(3, 'Alfarería',
-               ['Las piezas realizadas en el torno comúnmente son concluidas manualmente, permitiendo todo tipo de intervención.',
-                'También esta técnica permite lograr una producción artesanal en serie',
+               ['Las piezas realizadas en el torno por lo común se concluyen manualmente, permitiendo todo tipo de intervención.',
+                'También esta técnica permite lograr una producción artesanal en serie.',
                 'Taller dirigido a adultos.',
                 'Variedad de días y horarios'
                ],
@@ -51,7 +51,7 @@ def cursos(request):
                ['El uso de esmaltes permite crear capas brillantes y mates, traslúcidas y opacas.',
                 'La manera de aplicar el producto varía según la forma de la pieza, su tamaño y también el acabado buscado.',
                 'Diferentes técnicas de esmaltado (por vertido, inmersión, pincel o pistola), permiten lograr resultados únicos.',
-                'Se trata de un curso avanzado para quienes quieren experimentar nuevas opciones de texturas y colores.'
+                'Se trata de un curso avanzado para quienes quieren experimentar nuevas opciones de decoración.'
                ],
                'ADULTO',
                'taller\img\curso-esmaltado2.jpg',
@@ -59,7 +59,7 @@ def cursos(request):
                v4)
     v5 = classes.Visual ("flush-headingFive","#flush-collapseFive","flush-collapseFive")
     c5 = classes.Curso(5, 'Especialización en arte precolombino',
-               ['Investigamos el arte precolombino, desarrollado con materiales y herramientas disponibles en el entorno de las regiones en las que vivían las diferentes culturas.',
+               ['Investigamos el arte precolombino, según el legado de diferentes culturas.',
                 'Realizaban vasijas, utensilios y recipientes en general, instrumentos musicales, máscaras, juguetes, esculturas, entre otras.',
                 'Se destaca la representación de la naturaleza y la veneración a los dioses.',
                 'Junto con figuras hechas en arcilla terracota que solían representar a mujeres y aludían a los ritos de la fertilidad.',
