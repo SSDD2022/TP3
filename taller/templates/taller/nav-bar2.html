@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#opciones">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" style="font-size:larger" id="opciones">
+    <ul class="navbar-nav" >
+      <li class="nav-item" >
+        <a class="nav-link" href="{% url 'taller' %}">Zeramika</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" href="{% url 'cursos' %}">Cursos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'galeria' %}">Galería</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Alumnos</a>
+      </li>
+    </ul>
+  </div>
+</nav>
