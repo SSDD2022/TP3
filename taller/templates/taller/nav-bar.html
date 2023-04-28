@@ -1,14 +1,24 @@
 
-
-<div class="nav-bar">
-    
-    <nav id="navInicio">
-        <ul>
-            <li><a href="{% url 'taller' %}">Inicio</a></li>
-            <li><a href="{% url 'cursos' %}">Cursos</a></li>
-            <li><a href="{% url 'galeria' %}">Galeria</a></li>
-            <li><a href="{% url 'tienda' %}">Tienda</a></li>
-        </ul>
-    </nav>
-
-</div>    
+</nav> -->
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#opciones">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- enlaces -->
+  <div class="collapse navbar-collapse" id="opciones">   
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'taller' %}">INICIO</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cursos' %}">CURSOS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'galeria' %}">GALERIA</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'tienda' %}">TIENDA???</a>
+      </li>            
+    </ul>
+  </div>
+</nav>
