@@ -19,7 +19,8 @@
         {% block extra_css %} {% endblock %}
     </head>
     <body>
-        <header>
+        <header class="header">
+            <a href="{% url 'taller' %}"><img class="logo" src="{% static 'taller/img/Logo.jpg' %}" alt="logo"></a>  
             {% block header %} {% endblock %}
         </header>
 
@@ -43,9 +44,9 @@
                         <nav>
                             <div class="titulo">Nuestras redes</div>
                             <div class="linea"></div>           
-                            <div class="boton"><a href=""> <i class='bx bxl-instagram-alt' style='color:#f348df'></i></a>  Instagram</div>
-                            <div class="boton"><a href=""> <i class='bx bxl-whatsapp' style='color:#70e451'></i></a>  Whatsapp</div>
-                            <div class="boton"><a href=""> <i class='bx bxl-linkedin-square' style='color:rgba(93,128,226,0.98)'></i></a>  Linkedin</div>
+                            <div class="boton"><a href=""> <i class='bx bxl-instagram-alt' style='color:#17420b'></i></a>  Instagram</div>
+                            <div class="boton"><a href=""> <i class='bx bxl-whatsapp' style='color:#17420b'></i></a>  Whatsapp</div>
+                            <div class="boton"><a href=""> <i class='bx bxl-linkedin-square' style='color:#17420b'></i></a>  Linkedin</div>
                         </nav>
                     </div>
                 </div>
