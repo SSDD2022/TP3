@@ -1,0 +1,18 @@
+.destacados{
+    width: 70%;
+    padding: 1em;
+    margin: 0 auto;
+    border:3px red solid;
+}
+
+.carousel-item {
+    height: 40vh;
+    background-size: cover;
+}
+.trabajos{
+    display: flex;
+    
+}
+.card{
+    width: 20%;
+}

@@ -8,7 +8,8 @@ def index(request):
     return render(request,"taller\index.html",context)
 
 def galeria(request):
-    context = {}
+    trabajos =[{'imagen':'','titulo':'TITULO 1','autor':'Fulano','fecha':2005},{'imagen':'','titulo':'TITULO 2','autor':'Sultano','fecha':2010},{'imagen':'','titulo':'TITULO 3','autor':'Mengano','fecha':2015},{'imagen':'','titulo':'TITULO 4','autor':'Juan','fecha':2017},{'imagen':'','titulo':'TITULO 5','autor':'Vale','fecha':2013},{'imagen':'','titulo':'TITULO 4','autor':'Silvia','fecha':2022},{'imagen':'','titulo':'TITULO 7','autor':'Adri','fecha':2012}]
+    context = {'trabajos':trabajos}
     return render(request,"taller\galeria.html",context)
 
 def cursos(request):
