@@ -1,3 +1,6 @@
+.header{
+    display: inline-block;
+}
 
 .contenido-foot{
     display: flex;

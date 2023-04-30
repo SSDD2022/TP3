@@ -1,6 +1,10 @@
 {% extends 'taller/base.html' %}
 {% load static %}
 
+{% block extra_css %} 
+    <link rel="stylesheet" href="{% static 'taller/css/index.css' %}">
+{% endblock %}
+
 {% block title %}Taller{% endblock %}
 <body>
     <h2>Taller de Cerámica</h2>
@@ -8,18 +12,25 @@
     {% block header %}
         
         <div class="header">
-                <h2>TALLER DE CERÁMICA</h2>
+            <h3>  ZERAMIKA</h3>
         </div>
 
     {% endblock %} 
 
     {% block content %}
         <section class="contenido-main">
-            <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit qui aperiam assumenda. Odio obcaecati, quis nostrum dolore eius fugit sequi provident, earum, placeat cum nam atque quasi veniam accusamus culpa.S</h4>
+            <div>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit qui aperiam assumenda. </p> 
+                <p>Odio obcaecati, quis nostrum dolore eius fugit sequi provident, earum, placeat cum nam atque quasi veniam accusamus culpa.S</p>
+            </div>
+        
+            <aside> 
+                <p>Aca va alguna publicidad</p> 
+            </aside>
         </section>
+        <div>
+            <h4>Dejanos tu comentario: </h4>
+        </div>
 
     {% endblock %}
 </body>
-</html>{% block extra_css %} 
-    <link rel="stylesheet" href="{% static 'taller/css/index.css' %}">
-{% endblock %}
