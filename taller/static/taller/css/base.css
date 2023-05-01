@@ -1,6 +1,5 @@
 body{
-    display: relative;
-        
+    display: relative;   /* Para scroll con header fijo */
 }
 
 header{
@@ -8,15 +7,20 @@ header{
 }
 
 .nav-link{
-    color: white !important;
-    font-weight: 800 !important;;
-    
+    color: bisque !important;
+    font-weight: bold !important;
 }
 .nav-link:hover , .nav-link:active  {
-    color: #B87988 !important;;
-    background-color: transparent !important;;
-   
+    /* color: white !important; */
+    font-weight: bolder !important;
+    filter: brightness(200%);
+    background-color: transparent !important;
+    text-decoration-line: /*overline*/ underline;
+    text-decoration-color: bisque; 
+    text-decoration-style:solid;
+    text-decoration-thickness:3px;
 }
+
 main{
     margin: auto;
 }
