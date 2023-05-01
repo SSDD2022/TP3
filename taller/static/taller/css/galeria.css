@@ -9,8 +9,13 @@
     height: 40vh;
     background-size: cover;
 }
+
+
 .trabajos{
     display: flex;
+    flex-wrap: wrap;
+    gap:1em;
+    justify-content: center;
     
 }
 .card{

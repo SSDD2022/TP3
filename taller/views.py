@@ -10,11 +10,18 @@ def index(request):
 
 def galeria(request):
 
-    #momentaneo hasta tomar los datos de la BD ----------------------------------------
-    trabajos =[{'imagen':'galeria\i1.jpg','titulo':'TITULO 1','autor':'Fulano','fecha':2005},{'imagen':'galeria\i2.jpg','titulo':'TITULO 2','autor':'Sultano','fecha':2010},{'imagen':'galeria\i3.jpg','titulo':'TITULO 3','autor':'Mengano','fecha':2015},{'imagen':'galeria\i4.jpg','titulo':'TITULO 4','autor':'Juan','fecha':2017},{'imagen':'galeria\i5.jpg','titulo':'TITULO 5','autor':'Vale','fecha':2013},{'imagen':'galeria\i6.jpg','titulo':'TITULO 4','autor':'Silvia','fecha':2022},{'imagen':'galeria\i7.jpg','titulo':'TITULO 7','autor':'Adri','fecha':2012}]
-    context = {'trabajos':trabajos}
-    #-----------------------------------------------------------------------------------
+    destacados = []
 
+    #momentaneo hasta tomar los datos de la BD ---------------------
+    trabajos =[{'imagen':'galeria\i1.jpg','titulo':'TITULO 1','autor':'Fulano','fecha':2005,'destacado':True},{'imagen':'galeria\i2.jpg','titulo':'TITULO 2','autor':'Sultano','fecha':2010,'destacado':False},{'imagen':'galeria\i3.jpg','titulo':'TITULO 3','autor':'Mengano','fecha':2015,'destacado':False},{'imagen':'galeria\i4.jpg','titulo':'TITULO 4','autor':'Juan','fecha':2017,'destacado':True},{'imagen':'galeria\i5.jpg','titulo':'TITULO 5','autor':'Vale','fecha':2013,'destacado':True},{'imagen':'galeria\i6.jpg','titulo':'TITULO 4','autor':'Silvia','fecha':2022,'destacado':True},{'imagen':'galeria\i7.jpg','titulo':'TITULO 7','autor':'Adri','fecha':2012,'destacado':True}]
+    #---------------------------------------------------------------
+    
+    for trabajo in trabajos:
+        if trabajo["destacado"]:
+            destacados.append(trabajo)
+
+    context = {'trabajos':trabajos, 'destacados':destacados}
+    
     return render(request,"taller\galeria.html",context)
 
 def cursos(request):
