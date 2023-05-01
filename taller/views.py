@@ -8,8 +8,12 @@ def index(request):
     return render(request,"taller\index.html",context)
 
 def galeria(request):
-    trabajos =[{'imagen':'','titulo':'TITULO 1','autor':'Fulano','fecha':2005},{'imagen':'','titulo':'TITULO 2','autor':'Sultano','fecha':2010},{'imagen':'','titulo':'TITULO 3','autor':'Mengano','fecha':2015},{'imagen':'','titulo':'TITULO 4','autor':'Juan','fecha':2017},{'imagen':'','titulo':'TITULO 5','autor':'Vale','fecha':2013},{'imagen':'','titulo':'TITULO 4','autor':'Silvia','fecha':2022},{'imagen':'','titulo':'TITULO 7','autor':'Adri','fecha':2012}]
+
+    #momentaneo hasta tomar los datos de la BD ----------------------------------------
+    trabajos =[{'imagen':'galeria\i1.jpg','titulo':'TITULO 1','autor':'Fulano','fecha':2005},{'imagen':'galeria\i2.jpg','titulo':'TITULO 2','autor':'Sultano','fecha':2010},{'imagen':'galeria\i3.jpg','titulo':'TITULO 3','autor':'Mengano','fecha':2015},{'imagen':'galeria\i4.jpg','titulo':'TITULO 4','autor':'Juan','fecha':2017},{'imagen':'galeria\i5.jpg','titulo':'TITULO 5','autor':'Vale','fecha':2013},{'imagen':'galeria\i6.jpg','titulo':'TITULO 4','autor':'Silvia','fecha':2022},{'imagen':'galeria\i7.jpg','titulo':'TITULO 7','autor':'Adri','fecha':2012}]
     context = {'trabajos':trabajos}
+    #-----------------------------------------------------------------------------------
+
     return render(request,"taller\galeria.html",context)
 
 def cursos(request):

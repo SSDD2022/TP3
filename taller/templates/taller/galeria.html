@@ -66,7 +66,7 @@
     <div class="trabajos">
       {% for trabajo in trabajos %}
         <div class="card">
-          <img src="{% static 'taller\img\curso-esmaltado2.jpg' %}" class="card-img-top" alt="...">
+          <img src="{% static trabajo.imagen %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{trabajo.titulo}}</h5>
             <p class="card-text">Autor: {{trabajo.autor}}</p>
