@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from . import classes
 
+
 # Create your views here.
 def index(request):
     context = { 'pagina' : 'taller\index.html',
@@ -77,3 +78,8 @@ def cursos(request):
     ListadoCursos = [ c1, c2, c3, c4, c5 ]
     context = { 'cursos': ListadoCursos}
     return render(request,"taller\cursos.html",context)
+
+def alumnos(request):
+    context = { 'pagina' : 'taller/alumnos.html',
+              }
+    return render(request,'taller/alumnos.html',context)
