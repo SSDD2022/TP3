@@ -21,7 +21,7 @@
   margin-right: 1%;    
 }
 .estilo-button:hover {
-  background-color: #9ea6d3;
+  background-color: rgb(193, 214, 241); /* #9ea6d3; */
 }
 .active {
   background-color: #A9A9A9 ; 
