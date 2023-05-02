@@ -1,5 +1,4 @@
-from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from . import classes
 from . import forms
 
@@ -96,6 +95,8 @@ def inscripcion(request):
     if request.method == 'POST':
         #POST
         inscripcion_form = forms.Inscripcion_form(request.POST)
+        if inscripcion_form.is_valid():
+            return redirect('cursos')
     else:
         #GET
         inscripcion_form = forms.Inscripcion_form()
