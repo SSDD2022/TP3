@@ -19,7 +19,15 @@
         {% include 'taller/nav-bar.html' %}
         
         <header style="margin-top: 4rem;" >
-           
+            <section class="mensajes">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </section>
             {% block header %} {% endblock %}
 
         </header>

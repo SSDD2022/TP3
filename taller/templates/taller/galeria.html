@@ -78,7 +78,6 @@
     </div>
   </section>
 
-
   <section>
     <h2>Mas obras de arte de nuestra comunidad...</h2>
     <div class="trabajos">
@@ -94,6 +93,7 @@
       </div>
       {% endfor %}
     </div>
+    <a href="{% url 'agregar_trabajo' %}"><button id="agregar-trabajo">AGREGAR TRABAJO</button></a>
   </section>
 
   {% endblock %}

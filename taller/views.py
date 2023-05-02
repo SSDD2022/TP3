@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from . import classes
 from . import forms
 
@@ -100,4 +101,21 @@ def inscripcion(request):
         inscripcion_form = forms.Inscripcion_form()
     context = {'form': inscripcion_form}
     return render(request,'taller/inscripcion.html' ,context)
+
+def agregar_trabajo(request):
+    if request.method == 'POST':
+        #POST
+        agregar_trabajo_form = forms.agregar_trabajo_form(request.POST)
+         # Validaciones
+        if agregar_trabajo_form.is_valid():
+            messages.add_message(request, messages.SUCCESS, 'Trabajo agregado a la galería Correctamente')
+            return redirect("galeria")
+        else:
+            messages.add_message(request, messages.ERROR, 'Ocurrió un error')
+
+    else:
+        #GET
+        agregar_trabajo_form = forms.agregar_trabajo_form()
+        context = {'form': agregar_trabajo_form}
+        return render(request, "taller/agregar_trabajo_galeria.html", context)
 
