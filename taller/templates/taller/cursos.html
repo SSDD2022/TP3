@@ -41,7 +41,7 @@
               </div>
               <div class="btn-container">
                 {% if curso.cupo %}
-                  <button class="destacado con_vacantes">Vacantes disponibles - Inscribite !</button>
+                <a class="destacado con_vacantes" href="{% url 'inscripcion' %}" >Vacantes disponibles - Inscribite !</a>
                 {% else %}
                   <button class="destacado sin_vacantes">Contactanos si es de tu interés</button>            
                 {% endif %}

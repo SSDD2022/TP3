@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . import classes
+from . import forms
 
 
 # Create your views here.
@@ -84,9 +85,19 @@ def cursos(request):
                v5)
     ListadoCursos = [ c1, c2, c3, c4, c5 ]
     context = { 'cursos': ListadoCursos}
-    return render(request,"taller\cursos.html",context)
+    return render(request,"taller/cursos.html",context)
 
 def alumnos(request):
     context = { 'pagina' : 'taller/alumnos.html',
               }
     return render(request,'taller/alumnos.html',context)
+def inscripcion(request):
+    if request.method == 'POST':
+        #POST
+        inscripcion_form = forms.Inscripcion_form(request.POST)
+    else:
+        #GET
+        inscripcion_form = forms.Inscripcion_form()
+    context = {'form': inscripcion_form}
+    return render(request,'taller/inscripcion.html' ,context)
+
