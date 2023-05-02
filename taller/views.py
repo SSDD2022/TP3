@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from . import classes
 from . import forms
 
@@ -110,7 +111,7 @@ def agregar_trabajo(request):
          # Validaciones
         if agregar_trabajo_form.is_valid():
             messages.add_message(request, messages.SUCCESS, 'Trabajo agregado a la galería Correctamente')
-            return redirect("galeria")
+            return redirect('galeria')
         else:
             messages.add_message(request, messages.ERROR, 'Ocurrió un error')
 
