@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse
 from . import classes
 from . import forms
 
@@ -92,15 +93,22 @@ def alumnos(request):
     context = { 'pagina' : 'taller/alumnos.html',
               }
     return render(request,'taller/alumnos.html',context)
-def inscripcion(request):
+
+def inscripcion(request, id_curso=None):
     if request.method == 'POST':
         #POST
         inscripcion_form = forms.Inscripcion_form(request.POST)
         if inscripcion_form.is_valid():
-            return redirect('cursos')
+            cursos_elegidos = inscripcion_form.cleaned_data['cursos']
+            if len(cursos_elegidos) == 0:
+                messages.add_message(request, messages.ERROR, 'Por favor seleccioná un curso')
+            else:
+               # messages.add_message(request, messages.INFO, 'Inscripción correcta')
+               return redirect(reverse('cursos'))
     else:
         #GET
-        inscripcion_form = forms.Inscripcion_form()
+        inscripcion_form = forms.Inscripcion_form(initial={'cursos':id_curso})
+
     context = {'form': inscripcion_form}
     return render(request,'taller/inscripcion.html' ,context)
 
