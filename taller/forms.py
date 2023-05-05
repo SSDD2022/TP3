@@ -13,9 +13,10 @@ class Inscripcion_form(forms.Form):
         fecha_nacimiento = forms.DateField(label="Fecha de Nacimiento", required=True, widget=forms.SelectDateWidget(years=range(1930,2023)))
         telefono = forms.CharField(widget=forms.NumberInput(),label="Numero de Telefono", required=True) 
         cursos = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices = CURSOS, required=False)
-#       def clean_cursos (self):
-#            if len(self.cursos) == 0:
-#                raise ValidationError ( 'Por favor seleccioná un curso ...')
+        def clean_cursos (self):
+             data = self.cleaned_data["cursos"]
+             if len(data) == 0:
+                 raise ValidationError ( 'Por favor seleccioná un curso ...')
 
 
 class agregar_trabajo_form(forms.Form):
