@@ -1,18 +1,34 @@
 {% extends 'taller/base.html' %}
+{% load static %}
+
+{% block extra_css %} 
+    <link rel="stylesheet" href="{% static 'taller/css/index.css' %}">
+{% endblock %}
 
 {% block title %}Taller{% endblock %}
 <body>
-    <h2>Taller de Cerámica</h2>
-    <h3>Página principal  ({{pagina}})</h3>
     {% block header %}
-        <h1>TALLER DE CERÁMICA</h1>
-        <h3>Página principal  ({{pagina}})</h3>
-    {% endblock %}
+        <h2>  Tu taller de ceramica</h2>
+    {% endblock %} 
 
     {% block content %}
-        <section>
-            <h4>Novedades</h4>
-        </section>
+        <section class="contenido-main">
+            <div>
+                <p>Nuestro objetivo es crear un ámbito de conocimiento, aprendizaje y expresión a través de la cerámica. </p>
+                <p> La arcilla es un material de potencialidades únicas, y al trabajar con ella conectamos con algo ancestral, que ha acompañado a todas las culturas humanas desde sus inicios.</p>
+                <p>Con cerámica se pueden crear objetos para usar, prácticos y para disfrutar con ellos otras actividades diarias como es comer. Y la sensación de ser capaz de hacer tus propias cosas, de nuevo, aumenta la autoestima y la sensación de independencia</p>
+            </div>
+        
+            <article> 
+                <h3> Aca va alguna publicidad sobre cursos </h3> 
+            </article>
+       
+            <div>
+                <ul>
+                    <li>Dejanos tu comentario <a href="{% url 'alumnos' %}"><i class='bx bx-message-rounded'></i> </a></li>
+                </ul>    
+                </div>
+        </section>    
+
     {% endblock %}
 </body>
-</html>

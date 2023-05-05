@@ -1,25 +1,64 @@
 {% extends 'taller/base.html' %}
+{% load static %}
 
 {% block title %}Cursos{% endblock %}
 
-<body>
-    {% block header %}
-        <h1>CURSOS</h1>
-        <h3>Aca van los cursos disponible para hacer</h3>
-    {% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/cursos.css' %}">
+{% endblock %}
 
-    {% block content %}
-        <div>
-            <h4>CURSO 1</h4>
-            <button>Inscribirme!</button>
+{% block header %}
+      <h3>Cursos y talleres</h3>
+      <h5>Para todas las edades y niveles, te podes sumar en cualquier momento del año</h5>
+{% endblock %} 
+
+{% block content %}
+
+    <div class="accordion" id="accordionFlushExample">
+      {% for curso in cursos %}
+        <div class="accordion-item estilo-item">
+          <h2 class="accordion-header" id={{curso.visual.fheadingX}}>
+            <button class="accordion-button collapsed estilo-button" type="button" data-bs-toggle="collapse" data-bs-target={{curso.visual.fcollapseCX}} aria-expanded="false" aria-controls={{curos.visual.fcollapseX}}>
+              {% filter upper %}
+              {{curso.titulo}}
+              {% endfilter %}
+            </button>
+          </h2>
+          <div id={{curso.visual.fcollapseX}} class="accordion-collapse collapse" aria-labelledby={{curso.visual.fheadingX}} data-bs-parent="#accordionFlushExample" >
+            <div class="accordion-body main-container" >
+              <div class="img-container">
+                <div class="imagen">
+                  <img src="{% static curso.imagen %}" alt="curso" class="img_responsive">
+                </div>
+              </div>
+              <div class="det-container">
+                <div class="descripcion">
+                  {% for desc in curso.descripcion %}
+                    <p>{{desc}}</p>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="btn-container">
+                {% if curso.cupo %}
+                  {% comment "Pruebas de url con parámetros" %}
+                  <!-- <a class="destacado con_vacantes" href="{% url 'inscripcion' %}" >Vacantes disponibles - Inscribite !</a> -->
+                  <!-- <a class="destacado con_vacantes" href="{% url 'inscripcion' curso.id %}" >Vacantes disponibles - Inscribite !</a> --> -->
+                  <!-- <a class="destacado con_vacantes" href="{% url 'inscripcion' id_curso=curso.id %}" >Vacantes disponibles - Inscribite !</a> -->
+                  {% endcomment %}
+                  <a class="destacado con_vacantes" href="{% url 'inscripcion' curso.id %}" >Vacantes disponibles - Inscribite !</a>
+                {% else %}
+                  <button class="destacado sin_vacantes">Contactanos si es de tu interés</button>            
+                {% endif %}
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-            <h4>CURSO 2</h4>
-            <button>Inscribirme!</button>
-        </div>
-        <div>
-            <h4>CURSO 3</h4>
-            <button>Inscribirme!</button>
-        </div>
-    {% endblock %}
-</body>
+      {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+  
+
+ 
