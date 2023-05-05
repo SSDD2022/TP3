@@ -1,13 +1,11 @@
 # TP3
 # Grupo 3
-#  Integrantes: Durán, Fante, Fernandez, Fernández Escudero
-#  Bajas: Font
-
-<!-- 
+Integrantes: Durán, Fante, Fernandez, Fernández Escudero
+Bajas: Font
 
 Exposiciones Parciales:
 √ Semana del 17/04 al 21/04 – Fecha 15 según Programa.
-• Semana del 01/05 al 05/05 – Fecha 20 según Programa.
+√ Semana del 01/05 al 05/05 – Fecha 20 según Programa.
 • Semana del 22/05 al 29/05 – Fecha 25 según Programa.
 • Semana del 05/06 al 09/06 – Fecha 30 según Programa.
 
@@ -22,7 +20,7 @@ El PIG deberá ser un sitio web con temática a elección, orientado a la gesti�
 √ 3. El proyecto deberá poseer al menos una aplicación de Django
 √ 4. Deben existir al menos 3 rutas distintas.
 
-5. Debe existir al menos una vista parametrizada.
+√ 5. Debe existir al menos una vista parametrizada.
 
 √ 6. Se deben utilizar templates que cumplan con las siguientes características:
 √ • Debe haber al menos un template asociado a una vista.
@@ -31,9 +29,9 @@ El PIG deberá ser un sitio web con temática a elección, orientado a la gesti�
 √ • Debe existir al menos un template que utilice archivos estáticos (js, css, etc).
 
 7. Se deben utilizar Django Forms que cumplan con las siguientes características:
-• Al menos un formulario debe poseer validaciones en el front-end y en el back-end
-• Debe haber al menos un formulario asociado a un template.
-• Debe haber al menos un formulario basado en clases.
+√ • Al menos un formulario debe poseer validaciones en el front-end y en el back-end
+√ • Debe haber al menos un formulario asociado a un template.
+√ • Debe haber al menos un formulario basado en clases.
 • Debe haber al menos un formulario asociado a un modelo.
 
 8. Deben existir al menos dos modelos distintos.
@@ -54,4 +52,3 @@ Condiciones de aprobación y metodología de entrega: para aprobar el proyecto s
 Según decisión del instructor, en la exposición final se puede brindar la posibilidad de exponer mediante la preparación de un video, 
 donde deberán exponer todas las personas que integren el equipo, en caso de no poder realizarlo en vivo.
 
--->
