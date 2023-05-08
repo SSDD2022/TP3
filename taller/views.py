@@ -99,10 +99,6 @@ def inscripcion(request, id_curso=None):
         #POST
         inscripcion_form = forms.Inscripcion_form(request.POST)
         if inscripcion_form.is_valid():
-            cursos_elegidos = inscripcion_form.cleaned_data['cursos']
-            if len(cursos_elegidos) == 0:
-                messages.add_message(request, messages.ERROR, 'Por favor seleccioná un curso')
-            else:
                # messages.add_message(request, messages.INFO, 'Inscripción correcta')
                return redirect(reverse('cursos'))
     else:

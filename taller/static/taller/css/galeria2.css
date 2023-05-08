@@ -6,10 +6,6 @@
     border-radius: 5px;
 }
 
-/* .carousel-item {
-    height: 40vh;
-    background-size: cover;
-} */
 
 .carousel .carousel-item {
     height: 300px;
@@ -69,6 +65,8 @@
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    align-items: center;
+    text-align: center;
 }
 
 #agregar-trabajo{
