@@ -19,7 +19,7 @@ class Inscripcion_form(forms.Form):
 
 
 class agregar_trabajo_form(forms.Form):
-    imagen = forms.FileField(label = "imagen", required=True)
+    #imagen = forms.FileField(label = "imagen", required=True)
     titulo = forms.CharField(label="Título", required=True)
     autor = forms.CharField(label="Autor", required=True)
     fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))

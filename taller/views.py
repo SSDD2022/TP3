@@ -118,14 +118,15 @@ def agregar_trabajo(request):
         agregar_trabajo_form = forms.agregar_trabajo_form(request.POST)
          # Validaciones
         if agregar_trabajo_form.is_valid():
-            messages.add_message(request, messages.SUCCESS, 'Trabajo agregado a la galería Correctamente')
-            return redirect('galeria')
+            messages.add_message(request, messages.SUCCESS, 'Trabajo agregado a la galería Correctamente', extra_tags="mensaje_exitoso")
+            return redirect(reverse('galeria'))
         else:
             messages.add_message(request, messages.ERROR, 'Ocurrió un error')
 
     else:
         #GET
         agregar_trabajo_form = forms.agregar_trabajo_form()
-        context = {'form': agregar_trabajo_form}
-        return render(request, "taller/agregar_trabajo_galeria.html", context)
+    
+    context = {'form': agregar_trabajo_form}
+    return render(request, "taller/agregar_trabajo_galeria.html", context)
 

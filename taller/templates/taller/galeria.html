@@ -5,96 +5,93 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'taller/css/galeria2.css' %}">{% endblock %}
 
-<body>
-  {% block header %}
-  <h1>Galería de Trabajos</h1>
-  <h3>Fotos de platos, tazas cucos, etc hecho por alumnos...</h3>
-  {% endblock %}
 
-  {% block content %}
+{% block header %}
+<h1>Galería de Trabajos</h1>
+<h3>Fotos de platos, tazas cucos, etc hecho por alumnos...</h3>
+{% endblock %}
 
-  <section class="destacados">
-    <h2>DESTACADOS DEL MES</h2>
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        {% for destacado in destacados %}
-          {% if forloop.counter0 == 0 %}
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-              aria-current="true" aria-label="Slide 1"></button>
-          {% else %}
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter0}}"
-            aria-label="Slide {{forloop.counter}}"></button>
-          {% endif %}
-        {% endfor %}
-      </div>
-      <div class="carousel-inner">
-          {% for destacado in destacados %}
-          {% if forloop.counter0 == 0 %}
-            <div class="carousel-item active">
-              <img src="{% static destacado.imagen %}" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>{{destacado.titulo}}</h5>
-                <p>Autor: {{destacado.autor}}</p>
-                <p>Año: {{destacado.fecha}}</p>
-              </div>
-            </div>
-          {% else %}
-            <div class="carousel-item">
-              <img src="{% static destacado.imagen %}" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>{{destacado.titulo}}</h5>
-                <p>Autor: {{destacado.autor}}</p>
-                <p>Año: {{destacado.fecha}}</p>
-              </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-        
-        <!-- <div class="carousel-item">
-          <img src="{% static 'taller\img\curso-alfareria_adultos9.png' %}" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="{% static 'taller\img\curso-ceramica_adultos3.jpg' %}" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
-          </div>
-        </div> -->
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+{% block content %}
+
+<section class="destacados">
+
+  <h2>DESTACADOS DEL MES</h2>
+
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      {% for destacado in destacados %}
+      {% if forloop.counter0 == 0 %}
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      {% else %}
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter0}}"
+        aria-label="Slide {{forloop.counter}}"></button>
+      {% endif %}
+      {% endfor %}
     </div>
-  </section>
+    <div class="carousel-inner">
+      {% for destacado in destacados %}
+      {% if forloop.counter0 == 0 %}
+      <div class="carousel-item active">
+        <img src="{% static destacado.imagen %}" class="d-block w-100 h-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>{{destacado.titulo}}</h5>
+          <p>Autor: {{destacado.autor}}</p>
+          <p>Año: {{destacado.fecha}}</p>
+        </div>
+      </div>
+      {% else %}
+      <div class="carousel-item">
+        <img src="{% static destacado.imagen %}" class="d-block w-100 h-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>{{destacado.titulo}}</h5>
+          <p>Autor: {{destacado.autor}}</p>
+          <p>Año: {{destacado.fecha}}</p>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 
-  <section>
-    <h2>Mas obras de arte de nuestra comunidad...</h2>
-    <div class="trabajos">
-      {% for trabajo in trabajos %}
-      <div class="card">
+</section>
+
+<section>
+
+  <h2>Mas obras de arte de nuestra comunidad...</h2>
+
+  <div class="trabajos">
+
+    {% for trabajo in trabajos %}
+    <div class="card" onclick="verImagen()">
         <img src="{% static trabajo.imagen %}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{trabajo.titulo}}</h5>
           <p class="card-text">Autor: {{trabajo.autor}}</p>
           <p class="card-text">Año: {{trabajo.fecha}}</p>
-          <a href="#" class="btn btn-primary"></a>
+          <!-- <a href="#" class="btn btn-primary"></a> -->
         </div>
-      </div>
-      {% endfor %}
     </div>
-    <a href="{% url 'agregar_trabajo' %}"><button id="agregar-trabajo">AGREGAR TRABAJO</button></a>
-  </section>
+    {% endfor %}
+  </div>
 
-  {% endblock %}
-</body>
+  <div id="div-imagen" class="imagen-trabajo">
+    <div class="contenido">
+      <img src="" alt="imagen del trabajo">
+      <p style="color:red;display:block">aca se va a mostrar mas grande la imagen</p>
+  </div>
+  </div>
+  <a href="{% url 'agregar_trabajo' %}"><button id="agregar-trabajo">AGREGAR TRABAJO</button></a>
+
+</section>
+
+{% endblock %}
+{% block extra_js %}<script src="{% static 'taller/js/galeria.js' %}"></script>{% endblock %}

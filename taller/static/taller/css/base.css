@@ -2,6 +2,11 @@ body{
     display: relative;   /* Para scroll con header fijo */
 }
 
+.mensaje_exitoso{
+    background-color: lightgreen;
+    width: 100%;
+}
+
 header{
     margin-top: 4em;
 }
