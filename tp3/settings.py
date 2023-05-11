@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'tp3.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ceramikadatabase',
+        'USER': 'postgres',
+        'PASSWORD': 'codoacodo2023',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 

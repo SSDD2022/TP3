@@ -71,10 +71,17 @@
   <div class="trabajos">
 
     {% for trabajo in trabajos %}
-    <div class="card" onclick="verImagen()">
-        <img src="{% static trabajo.imagen %}" class="card-img-top" alt="...">
+    <div class="card">
+        <img src="{% static trabajo.imagen %}" class="card-img-top" alt="..." onclick="verImagen()">
         <div class="card-body">
-          <h5 class="card-title">{{trabajo.titulo}}</h5>
+          <div></div>
+          <h5 class="card-title">{{trabajo.titulo}}
+            {% if trabajo.destacado %}
+            <button id="btn-destacar" class="es-destacado">&#9733;</button>
+            {% else %}
+            <button id="btn-destacar" class="no-destacado">&#9733;</button>
+            {% endif %}
+          </h5>
           <p class="card-text">Autor: {{trabajo.autor}}</p>
           <p class="card-text">Año: {{trabajo.fecha}}</p>
           <!-- <a href="#" class="btn btn-primary"></a> -->
@@ -94,4 +101,7 @@
 </section>
 
 {% endblock %}
-{% block extra_js %}<script src="{% static 'taller/js/galeria.js' %}"></script>{% endblock %}
+{% block extra_js %}
+<script src="{% static 'taller/js/galeria.js' %}"></script>
+
+{% endblock %}
