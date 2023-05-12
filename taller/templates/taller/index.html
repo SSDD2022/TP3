@@ -8,26 +8,34 @@
 {% block title %}Taller{% endblock %}
 <body>
     {% block header %}
-        <h2>  Tu taller de ceramica</h2>
+        <h3 class="titulo_pagina">Bienvenid@ a nuestro taller</h3>
+        <h5 class="subtitulo_pagina">Te esperamos !</h5>
     {% endblock %} 
 
     {% block content %}
         <section class="contenido-main">
             <div>
-                <p>Nuestro objetivo es crear un ámbito de conocimiento, aprendizaje y expresión a través de la cerámica. </p>
-                <p> La arcilla es un material de potencialidades únicas, y al trabajar con ella conectamos con algo ancestral, que ha acompañado a todas las culturas humanas desde sus inicios.</p>
-                <p>Con cerámica se pueden crear objetos para usar, prácticos y para disfrutar con ellos otras actividades diarias como es comer. Y la sensación de ser capaz de hacer tus propias cosas, de nuevo, aumenta la autoestima y la sensación de independencia</p>
+                <p>La arcilla es un material de potencialidades únicas y al trabajarla, conectamos con algo ancestral, ha acompañado a las diversas culturas desde sus inicios.</p>
+                <p class="imagen">
+                    <img src="{% static 'taller\img\grupo-5.jpg' %}" alt="presentacion_2" class="img_responsive">
+                </p>
             </div>
-        
-            <article> 
-                <h3> Aca va alguna publicidad sobre cursos </h3> 
-            </article>
-       
             <div>
-                <ul>
-                    <li>Dejanos tu comentario <a href="{% url 'alumnos' %}"><i class='bx bx-message-rounded'></i> </a></li>
-                </ul>    
-                </div>
+                <p>Disfrutamos logrando nuestras propias obras, ya sean artísticas o utilitarias.</p>
+                <p class="imagen">
+                    <img src="{% static 'taller\img\grupo-1.jpg' %}" alt="presentacion_3" class="img_responsive">
+                </p>
+                <p>Adentrarnos en el fascinante mundo de texturas y colores nos permite experimentar y obtener resultados únicos.</p>
+            </div>      
+            <div>
+                <p class="imagen">
+                    <img src="{% static 'taller\img\grupo-4.png' %}" alt="presentacion_1" class="img_responsive">
+                </p>
+                <p>Nuestro objetivo es brindarte un ámbito de conocimiento, aprendizaje y expresión a través de la cerámica. </p>
+            </div>
+            <div>
+                <p>Dejanos tu comentario <a href="{% url 'alumnos' %}"><i class='bx bx-message-rounded'></i> </a></p>
+            </div>
         </section>    
 
     {% endblock %}

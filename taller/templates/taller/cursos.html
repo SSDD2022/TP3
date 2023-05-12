@@ -8,13 +8,13 @@
 {% endblock %}
 
 {% block header %}
-      <h3>Cursos y talleres</h3>
-      <h5>Para todas las edades y niveles, te podes sumar en cualquier momento del año</h5>
+      <h3 class="titulo_pagina">Cursos y talleres</h3>
+      <h5 class="subtitulo_pagina">Para todas las edades y niveles, te podes sumar en cualquier momento del año</h5>
 {% endblock %} 
 
 {% block content %}
 
-    <div class="accordion" id="accordionFlushExample">
+    <div class="accordion acordeon" id="accordionFlushExample">
       {% for curso in cursos %}
         <div class="accordion-item estilo-item">
           <h2 class="accordion-header" id={{curso.visual.fheadingX}}>
