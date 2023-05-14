@@ -1,7 +1,7 @@
 # TP3
 # Grupo 3
-Integrantes: Durán, Fante, Fernandez, Fernández Escudero
-Bajas: Font
+Integrantes: Durán, Fante, Fernández Escudero
+Bajas: Fernandez, Font
 
 Exposiciones Parciales:
 √ Semana del 17/04 al 21/04 – Fecha 15 según Programa.
@@ -38,14 +38,11 @@ El PIG deberá ser un sitio web con temática a elección, orientado a la gesti�
 
 9. En los modelos generados, debe haber al menos una relación de uno a muchos y una relación de muchos a muchos.
 
-10. El proyecto debe funcionar utilizando un servidor de base de datos local dentro de los soportados
-    (en el curso se recomienda PostgreSQL), 
-    y debe poseer las migraciones necesarias para su funcionamiento (no se permite utilizar SQLLite).
+√ 10. El proyecto debe funcionar utilizando un servidor de base de datos local dentro de los soportados (en el curso se recomienda PostgreSQL), y debe poseer las migraciones necesarias para su funcionamiento (no se permite utilizar SQLLite).
 
 11. Debe poder accederse al admin de Django y al menos los modelos que poseen la relación muchos a muchos deben poder administrarse del mismo.
 
-12. El proyecto debe poseer al menos una página a la que solo se pueda acceder mediante autenticación y
-    la misma debe ser validada tanto en el front-end como el back-end.
+12. El proyecto debe poseer al menos una página a la que solo se pueda acceder mediante autenticación y la misma debe ser validada tanto en el front-end como el back-end.
 
 Condiciones de aprobación y metodología de entrega: para aprobar el proyecto se requiere una exposición grupal del mismo en funcionamiento
 (se puede utilizar el ambiente de desarrollo) intentando no extender la misma más de 15 minutos. 

@@ -84,7 +84,8 @@
   /* border: 1px solid rgba(25, 207, 64, 0.8); */
 }
 .descripcion {
-  /* display: flex; */
+  display: inline-block;
+  /* white-space: wrap; */
   padding-left: 0.8%;
   /* padding-top: 0;
   padding-bottom: 0; */
