@@ -2,150 +2,32 @@
 {% load static %}
 
 {% block title %}Cursos{% endblock %}
+
 {% block extra_css %}
-    <style>
-        /* Acordeon */
-        .estilo-item {
-          margin-bottom: 0.5%;
-        }
-        .estilo-button {
-          background-color:#bfc7f3; 
-          color: #444;
-          cursor: pointer;
-          padding: 0.8%;
-          padding-left: 1.2%;
-          width: 100%;
-          border: none ;
-          text-align: left ;
-          outline: none ;
-          font-size: medium ;
-          font-weight: bold ;
-        }
-        .estilo-button:after {
-          color: #777;
-          font-weight: bold;
-          margin-right: 1%;    
-        }
-        .estilo-button:hover {
-          background-color: #9ea6d3;
-        }
-        .active {
-          background-color: #A9A9A9 ; 
-        }
-        /* Vacantes */
-        .destacado {
-          padding: 0.5%;
-          font-weight: bold;
-          border-radius: 0.3rem;
-          border: none;
-        }
-        .con_vacantes {
-          background-color: lightgreen;
-          color: green;
-        }
-        .sin_vacantes {
-          background-color: rgb(144, 224, 238);
-          color: blue;
-        }
-        /* Para grid */
-        .main-container {
-          display: grid;
-          grid-template-columns: 25% auto; /*14% 84%;*/
-          grid-template-rows: auto;
-          grid-template-areas: "img-area det-area"
-                              "btn-area btn-area";
-          grid-auto-flow: row;
-          grid-row-gap: 0.3rem;
-          grid-column-gap: 0.3rem;
-          width: 98%;
-          margin-top: 0.5rem;
-          margin-bottom: 0;
-          margin-left: 0.5rem;
-          margin-right: 0.5rem;
-          border: none; /* 1px solid red; */
-        }
-        .img-container {
-          grid-area: img-area;
-          justify-content: center;
-          /* border: 1px solid rgba(53, 12, 235, 0.8); */
-        }
-        .imagen {
-          text-align: center;  /* Centra la imagen horizontalmente */
-        }
-        .img_responsive{
-          /* width: 100%; */
-          width: auto;
-          height: auto;
-        }
-        .det-container {
-          grid-area: det-area;
-          /* padding: 1.4rem; */
-          align-content: center;
-          text-align: start; 
-          /* border: 1px solid rgba(25, 207, 64, 0.8); */
-        }
-        .descripcion {
-          /* display: flex; */
-          padding-left: 0.8%;
-          padding-top: 0.5%;
-          align-content: center;
-          place-self: center;
-        }
-        .btn-container {
-          grid-area: btn-area;
-          justify-content: center;
-          text-align: center; 
-          margin-bottom: 0.5%;
-          /* border: 1px solid rgba(226, 241, 13, 0.8); */
-        }
-/* Extra small devices (portrait phones, less than 576px) */
-@media screen and (max-width: 750.98px) { /*575.98px) { */
-    .main-container {
-      grid-template-columns: 1fr;
-      grid-template-areas: "img-area"
-                           "det-area"
-                           "btn-area";
-    }
-}
-
-/* Small devices (landscape phones, 576px and up) 
-   Medium devices (tablets, 768px and up) */
-/*@media screen and (min-width: 576px) and (max-width: 991.98px) { */
-@media screen and (min-width: 751px) and (max-width: 991.98px) {
-    .main-container {
-        grid-template-columns: 25% auto;
-        grid-template-areas: "img-area det-area"
-                             "btn-area btn-area";
-   }
-}
-
-/* Large devices (desktops, 992px and up) */
-/* @media screen and (min-width: 992px) {   
-} */
-
-    </style>
+  <link rel="stylesheet" href="{% static 'taller/css/cursos.css' %}">
 {% endblock %}
 
 {% block header %}
-      <h1>Cursos y talleres</h1>
-      <h3>Para todas las edades y niveles, te podes sumar en cualquier momento del año</h3>
-{% endblock %}
+      <h3 class="titulo_pagina">Cursos y talleres</h3>
+      <h5 class="subtitulo_pagina">Para todas las edades y niveles, te podes sumar en cualquier momento del año</h5>
+{% endblock %} 
 
 {% block content %}
 
-    <div class="accordion " id="accordionFlushExample">
+    <div class="accordion acordeon" id="accordionFlushExample">
       {% for curso in cursos %}
         <div class="accordion-item estilo-item">
           <h2 class="accordion-header" id={{curso.visual.fheadingX}}>
             <button class="accordion-button collapsed estilo-button" type="button" data-bs-toggle="collapse" data-bs-target={{curso.visual.fcollapseCX}} aria-expanded="false" aria-controls={{curos.visual.fcollapseX}}>
+              {% filter upper %}
               {{curso.titulo}}
+              {% endfilter %}
             </button>
           </h2>
           <div id={{curso.visual.fcollapseX}} class="accordion-collapse collapse" aria-labelledby={{curso.visual.fheadingX}} data-bs-parent="#accordionFlushExample" >
             <div class="accordion-body main-container" >
               <div class="img-container">
                 <div class="imagen">
-                  <!-- <img src="{% static 'taller\img\curso-alfareria_adultos9.png' %}" alt="curso"> -->
                   <img src="{% static curso.imagen %}" alt="curso" class="img_responsive">
                 </div>
               </div>
@@ -158,7 +40,12 @@
               </div>
               <div class="btn-container">
                 {% if curso.cupo %}
-                  <button class="destacado con_vacantes">Vacantes disponibles - Inscribite !</button>
+                  {% comment "Pruebas de url con parámetros" %}
+                  <!-- <a class="destacado con_vacantes" href="{% url 'inscripcion' %}" >Vacantes disponibles - Inscribite !</a> -->
+                  <!-- <a class="destacado con_vacantes" href="{% url 'inscripcion' curso.id %}" >Vacantes disponibles - Inscribite !</a> --> -->
+                  <!-- <a class="destacado con_vacantes" href="{% url 'inscripcion' id_curso=curso.id %}" >Vacantes disponibles - Inscribite !</a> -->
+                  {% endcomment %}
+                  <a class="destacado con_vacantes" href="{% url 'inscripcion' curso.id %}" >Vacantes disponibles - Inscribite !</a>
                 {% else %}
                   <button class="destacado sin_vacantes">Contactanos si es de tu interés</button>            
                 {% endif %}

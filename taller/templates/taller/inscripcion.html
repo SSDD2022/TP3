@@ -1,0 +1,24 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block title %}Inscipcion{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/cursos.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h3>Inscipcion a Cursos y talleres</h3>
+    <h5>Completa tus datos para inscribirte a nuestros cursos</h5>
+{% endblock %} 
+
+{% block content %}
+<form action="" method="POST">
+  {% csrf_token %}
+
+   {{ form.as_p }}
+
+   <input type="submit">
+
+</form>
+{% endblock %} 

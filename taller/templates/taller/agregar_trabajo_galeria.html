@@ -1,0 +1,23 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block title %}Agregar Trabajo{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'taller/css/galeria.css' %}">{% endblock %}
+
+<body>
+  {% block header %}
+  <h1>Agregar trabajo a la galería</h1>
+  <h3>...</h3>
+  {% endblock %}
+
+  {% block content %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+ 
+    <input type="submit">
+ 
+ </form>
+  {% endblock %}
+</body>
