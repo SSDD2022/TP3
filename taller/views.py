@@ -58,6 +58,11 @@ def inscripcion(request, id_curso=None):
         if inscripcion_form.is_valid():
             messages.add_message(request, messages.SUCCESS, 'Inscripción realizada correctamente')
             return redirect(reverse('cursos'))
+        else:
+#            for field in inscripcion_form:
+#                for error in field.errors:
+#                    messages.add_message(request, messages.ERROR,error)
+             messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
     else:
         #GET
         inscripcion_form = forms.Inscripcion_form(initial={'cursos':id_curso})
