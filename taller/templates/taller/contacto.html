@@ -1,0 +1,32 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block title %}Inscipcion{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/contacto.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h3 class="titulo_pagina">Contacto</h3>
+    <h5 class="subtitulo_pagina">Dejanos tus datos y te contactaremos a la brevedad</h5>
+{% endblock %} 
+
+{% block content %}
+<form action="" method="POST">
+  <section class="form-container">
+      {% csrf_token %}
+      <div class="labeles">{{form.motivo.label}}:</div>
+        {{form.motivo}}
+      <div class="labeles">{{form.nombre.label}}:</div>
+        {{form.nombre}}
+      <div class="labeles">{{form.apellido.label}}:</div>
+        {{form.apellido}}
+      <div class="labeles">{{form.mail.label}}:</div>
+        {{form.mail}}
+      <div class="labeles">{{form.comentario.label}}:</div>
+        {{form.comentario}}
+    <input type="submit" name="f_enviar"   id="f_enviar"   value="Enviar" class="botones">
+  </section>
+</form>
+{% endblock %} 

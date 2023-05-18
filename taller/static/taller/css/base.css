@@ -1,3 +1,12 @@
+*{
+    margin: 0;                     /* buena práctica: resetear */
+    padding: 0;                    /* buena práctica: resetear */
+                                   /* setear fuentes y por último sans-serif */
+/*    font-size: medium;  */
+    box-sizing: border-box;
+    user-select: none;
+ }
+
 body{
     display: relative;   /* Para scroll con header fijo */
 }

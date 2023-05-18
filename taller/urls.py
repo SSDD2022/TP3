@@ -10,5 +10,7 @@ urlpatterns = [
  #  re_path(r'^cursos/inscripcion/(?P<id_curso>\d{1,2})/$', views.inscripcion, name="inscripcion"),
    path('cursos/inscripcion/<int:id_curso>/', views.inscripcion, name="inscripcion"),
    path('cursos/inscripcion/', views.inscripcion, name="inscripcion"),
-   path('agregar_trabajo/', views.agregar_trabajo, name="agregar_trabajo")
+   path('agregar_trabajo/', views.agregar_trabajo, name="agregar_trabajo"),
+   path('contacto/<motivo>/', views.contacto, name="contacto"),
+   path('contacto/', views.contacto, name="contacto")
    ]

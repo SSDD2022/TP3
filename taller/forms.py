@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+import re
 class Inscripcion_form(forms.Form):
         CURSOS = ((1, 'Cerámica para niños'),
                   (2, 'Cerámica para adultos'),
@@ -25,3 +26,26 @@ class agregar_trabajo_form(forms.Form):
     autor = forms.CharField(label="Autor", required=True)
     fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     #curso = forms.ChoiceField(choices=TYPE_CHOICES,)
+
+class Contacto(forms.Form):
+    MOTIVOS = (('SUG', 'Sugerencia'),
+               ('CON', 'Consulta'),
+               ('SUS', 'Suscripción')
+              )    
+    motivo = forms.ChoiceField(choices = MOTIVOS, required=True) 
+    nombre = forms.CharField(max_length=30,label="Nombre", required=True)
+    apellido = forms.CharField(max_length=50,label="Apellido", required=True)
+    mail = forms.EmailField(max_length=30,label="Email", required=True)
+    comentario = forms.CharField(max_length=500,widget=forms.Textarea(attrs={"rows":"5"}),required=False)
+    def clean_mail (self):
+        EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+        mail = self.cleaned_data.get('mail')
+        if mail and not re.match(EMAIL_REGEX, mail):
+            raise ValidationError ('Mail inválido')
+    def clean (self):
+        motivo = self.cleaned_data["motivo"]
+        comentario = self.cleaned_data["comentario"]
+        if motivo != 'SUS' and len(comentario) == 0:
+           self.fields['comentario'].widget.attrs['placeholder'] = 'Por favor completa el comentario ...'
+           raise ValidationError ( 'Por favor completa el comentario ...')
+

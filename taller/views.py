@@ -88,3 +88,21 @@ def agregar_trabajo(request):
     context = {'form': agregar_trabajo_form}
     return render(request, "taller/agregar_trabajo_galeria.html", context)
 
+def contacto(request,motivo=None):
+    if request.method == 'POST':
+        #POST
+        contacto_form = forms.Contacto(request.POST)
+        if contacto_form.is_valid():
+            messages.add_message(request, messages.SUCCESS, 'Mensaje recibido correctamente')
+            if motivo == 'SUG':
+               return redirect(reverse('taller'))
+            else:
+               return redirect(reverse('cursos'))         
+        else:
+            messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
+    else:
+        #GET
+        contacto_form = forms.Contacto(initial={'motivo':motivo})
+
+    context = {'form': contacto_form}
+    return render(request,"taller\contacto.html",context)
