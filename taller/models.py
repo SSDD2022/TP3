@@ -30,7 +30,17 @@ class CursoDescripcion (models.Model):
                                    #validators=NotImplemented
                                    )
 
-
+class Contacto (models.Model):
+    motivo = models.CharField(max_length=3,verbose_name='Motivo',
+                              blank=False,null=False,help_text='Motivo del contacto') 
+    nombre = models.CharField(max_length=30,verbose_name='Nombre',
+                              blank=False,null=False,help_text='Nombre')
+    apellido = models.CharField(max_length=50,verbose_name='Apellido',
+                              blank=False,null=False,help_text='Apellido')
+    mail = models.EmailField(max_length=30,verbose_name='Mail',
+                             blank=False,null=False,help_text='Mail')
+    comentario = models.CharField(max_length=500,verbose_name='Comentario',
+                              blank=True,null=True,help_text='Comentario')
 
 #class Turno (models.Model, Curso)
 #   

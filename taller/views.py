@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.urls import reverse
 from . import classes
 from . import forms
-from taller.models import Curso, CursoDescripcion
+from taller.models import Curso, CursoDescripcion, Contacto
 
 
 # Create your views here.
@@ -93,6 +93,14 @@ def contacto(request,motivo=None):
         #POST
         contacto_form = forms.Contacto(request.POST)
         if contacto_form.is_valid():
+            motivo = contacto_form.cleaned_data["motivo"]
+            nombre = contacto_form.cleaned_data["nombre"]
+            apellido = contacto_form.cleaned_data["apellido"]
+            mail = contacto_form.cleaned_data["mail"]
+            comentario = contacto_form.cleaned_data["comentario"]
+            contacto = Contacto (motivo=motivo,nombre=nombre,apellido=apellido,
+                                 mail=mail,comentario=comentario)
+            contacto.save()
             messages.add_message(request, messages.SUCCESS, 'Mensaje recibido correctamente')
             if motivo == 'SUG':
                return redirect(reverse('taller'))

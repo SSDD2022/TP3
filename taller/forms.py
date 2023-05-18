@@ -42,6 +42,7 @@ class Contacto(forms.Form):
         mail = self.cleaned_data.get('mail')
         if mail and not re.match(EMAIL_REGEX, mail):
             raise ValidationError ('Mail inválido')
+        return self.cleaned_data.get('mail')
     def clean (self):
         motivo = self.cleaned_data["motivo"]
         comentario = self.cleaned_data["comentario"]
