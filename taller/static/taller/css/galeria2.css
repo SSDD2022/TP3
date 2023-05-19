@@ -49,6 +49,9 @@
     scale: 1.01;
 }
 
+.destacar-form{
+    display: inline;
+}
 .es-destacado{
     color: rgb(255, 230, 0);
     border: none;
@@ -81,6 +84,10 @@
     border: 1px solid #888;
     width: 80%;
     text-align: center;
+
+}
+.contenido img{
+    width: 100%;
 }
 
 #agregar-trabajo{

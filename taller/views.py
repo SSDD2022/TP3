@@ -19,7 +19,7 @@ def galeria(request):
     #trabajos =[{'imagen':'galeria\i1.jpg','titulo':'TITULO 1','autor':'Fulano','fecha':2005,'destacado':True},{'imagen':'galeria\i2.jpg','titulo':'TITULO 2','autor':'Sultano','fecha':2010,'destacado':False},{'imagen':'galeria\i3.jpg','titulo':'TITULO 3','autor':'Mengano','fecha':2015,'destacado':False},{'imagen':'galeria\i4.jpg','titulo':'TITULO 4','autor':'Juan','fecha':2017,'destacado':True},{'imagen':'galeria\i5.jpg','titulo':'TITULO 5','autor':'Vale','fecha':2013,'destacado':True},{'imagen':'galeria\i6.jpg','titulo':'TITULO 4','autor':'Silvia','fecha':2022,'destacado':False},{'imagen':'galeria\i7.jpg','titulo':'TITULO 7','autor':'Adri','fecha':2012,'destacado':True}]
     #---------------------------------------------------------------
     
-    trabajos = Trabajo.objects.all()
+    trabajos = Trabajo.objects.all().order_by("-fecha")
 
  #   for trabajo in trabajos:
  #       if trabajo.destacado:
@@ -80,9 +80,15 @@ def inscripcion(request, id_curso=None):
 def agregar_trabajo(request):
     if request.method == 'POST':
         #POST
-        agregar_trabajo_form = forms.agregar_trabajo_form(request.POST)
+        agregar_trabajo_form = forms.agregar_trabajo_form(request.POST, request.FILES)
          # Validaciones
         if agregar_trabajo_form.is_valid():
+            nuevo_trabajo = Trabajo(
+                titulo=agregar_trabajo_form.cleaned_data['titulo'], 
+                autor=agregar_trabajo_form.cleaned_data['autor'], 
+                imagen=agregar_trabajo_form.cleaned_data['imagen']
+            ) 
+            nuevo_trabajo.save()
             messages.add_message(request, messages.SUCCESS, 'Trabajo agregado a la galería Correctamente', extra_tags="mensaje_exitoso")
             return redirect(reverse('galeria'))
         else:
@@ -94,4 +100,3 @@ def agregar_trabajo(request):
     
     context = {'form': agregar_trabajo_form}
     return render(request, "taller/agregar_trabajo_galeria.html", context)
-
