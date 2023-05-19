@@ -1,11 +1,12 @@
 from django import forms
 from django.core.exceptions import ValidationError
-class Inscripcion_form(forms.Form):
-        CURSOS = ((1, 'Cerámica para niños'),
+
+CURSOS = ((1, 'Cerámica para niños'),
                   (2, 'Cerámica para adultos'),
                   (3, 'Alfarería'),
                   (4, 'Esmaltado'), 
                   (5, 'Especialización en arte precolombino'))
+class Inscripcion_form(forms.Form): 
         nombre = forms.CharField(label="Nombre", required=True)
         apellido = forms.CharField(label="Apellido", required=True)
         mail = forms.EmailField(label="Email", required=True)
@@ -20,8 +21,8 @@ class Inscripcion_form(forms.Form):
 
 
 class agregar_trabajo_form(forms.Form):
-    imagen = forms.FileField(label = "imagen", required=True)
+    imagen = forms.FileField(label="imagen", required=True)
     titulo = forms.CharField(label="Título", required=True)
     autor = forms.CharField(label="Autor", required=True)
     fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    #curso = forms.ChoiceField(choices=TYPE_CHOICES,)
+    curso = forms.ChoiceField(choices=CURSOS,)
