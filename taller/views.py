@@ -8,15 +8,15 @@ from taller.models import Curso, CursoDescripcion, Trabajo, Contacto
 
 # Create your views here.
 def index(request):
-    context = { 'pagina' : 'taller\index.html',
+    context = { 'pagina' : 'taller/index.html',
               }
-    return render(request,"taller\index.html",context)
+    return render(request,"taller/index.html",context)
 
 def galeria(request):
 
     destacados = Trabajo.objects.filter(destacado=True)
     #momentaneo hasta tomar los datos de la BD ---------------------
-    #trabajos =[{'imagen':'galeria\i1.jpg','titulo':'TITULO 1','autor':'Fulano','fecha':2005,'destacado':True},{'imagen':'galeria\i2.jpg','titulo':'TITULO 2','autor':'Sultano','fecha':2010,'destacado':False},{'imagen':'galeria\i3.jpg','titulo':'TITULO 3','autor':'Mengano','fecha':2015,'destacado':False},{'imagen':'galeria\i4.jpg','titulo':'TITULO 4','autor':'Juan','fecha':2017,'destacado':True},{'imagen':'galeria\i5.jpg','titulo':'TITULO 5','autor':'Vale','fecha':2013,'destacado':True},{'imagen':'galeria\i6.jpg','titulo':'TITULO 4','autor':'Silvia','fecha':2022,'destacado':False},{'imagen':'galeria\i7.jpg','titulo':'TITULO 7','autor':'Adri','fecha':2012,'destacado':True}]
+    #trabajos =[{'imagen':'galeria/i1.jpg','titulo':'TITULO 1','autor':'Fulano','fecha':2005,'destacado':True},{'imagen':'galeria/i2.jpg','titulo':'TITULO 2','autor':'Sultano','fecha':2010,'destacado':False},{'imagen':'galeria/i3.jpg','titulo':'TITULO 3','autor':'Mengano','fecha':2015,'destacado':False},{'imagen':'galeria/i4.jpg','titulo':'TITULO 4','autor':'Juan','fecha':2017,'destacado':True},{'imagen':'galeria/i5.jpg','titulo':'TITULO 5','autor':'Vale','fecha':2013,'destacado':True},{'imagen':'galeria/i6.jpg','titulo':'TITULO 4','autor':'Silvia','fecha':2022,'destacado':False},{'imagen':'galeria/i7.jpg','titulo':'TITULO 7','autor':'Adri','fecha':2012,'destacado':True}]
     #---------------------------------------------------------------
     
     trabajos = Trabajo.objects.all().order_by("-fecha")
@@ -27,7 +27,7 @@ def galeria(request):
 
     context = {'trabajos':trabajos, 'destacados':destacados}
     
-    return render(request,"taller\galeria.html",context)
+    return render(request,"taller/galeria.html",context)
 
 def cambiar_destacado(request, trabajo_id):
     trabajo = Trabajo.objects.get(id=trabajo_id)
@@ -43,7 +43,7 @@ def cursos(request):
         v = classes.Visual("flush-heading"+str(c.curso_id),"#flush-collapse"+str(c.curso_id),
                            "flush-collapse"+str(c.curso_id))
         x = classes.CursoOld(c.curso_id, c.titulo,[],
-                             'taller\img\\' + c.imagen,True,v)
+                             'taller/img/' + c.imagen,True,v)
         descripcioncilla = CursoDescripcion.objects.filter(curso_id=c.curso_id).order_by('posicion_id')
         for desc in descripcioncilla.all():
             x.descripcion.append(desc.descripcion)
@@ -126,4 +126,4 @@ def contacto(request,motivo=None):
         contacto_form = forms.Contacto(initial={'motivo':motivo})
 
     context = {'form': contacto_form}
-    return render(request,"taller\contacto.html",context)
+    return render(request,"taller/contacto.html",context)
