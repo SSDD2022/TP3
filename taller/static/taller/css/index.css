@@ -18,6 +18,12 @@
     align-items: center;
     justify-content: center;
 }
+/* .grupo-main {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0.8rem;
+} */
 
 .imagen {
     text-align: center;  /* Centra la imagen horizontalmente */
