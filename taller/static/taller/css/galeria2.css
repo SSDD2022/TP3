@@ -6,20 +6,14 @@
     border-radius: 5px;
 }
 
-/* .carousel-item {
-    height: 40vh;
-    background-size: cover;
-} */
 
 .carousel .carousel-item {
     height: 300px;
 }
   
 .carousel-item img {
-   position: absolute;
-   top: 0;
-   left: 0;
-   max-height: 300px;
+        object-fit: cover;
+        object-position: center;
 }
 
 .carousel-control-prev-icon {
@@ -34,12 +28,66 @@
     display: flex;
     flex-wrap: wrap;
     gap:1em;
-    justify-content: center;
-    
+    justify-content: center;    
 }
+
 .card{
     width: 20%;
     min-width: 250px;
+
+}
+
+.card-img-top{
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-img-top:hover{
+    cursor: pointer;
+    scale: 1.01;
+}
+
+.destacar-form{
+    display: inline;
+}
+.es-destacado{
+    color: rgb(255, 230, 0);
+    border: none;
+    background: none;
+    font-size: 2.5rem;
+}
+.no-destacado{
+    color: lightgrey;
+    border: none;
+    background: none;
+    font-size: 2rem;
+}
+
+#div-imagen{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.contenido{
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+
+}
+.contenido img{
+    width: 100%;
 }
 
 #agregar-trabajo{

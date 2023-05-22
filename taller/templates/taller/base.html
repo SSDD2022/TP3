@@ -18,15 +18,25 @@
                    
         {% include 'taller/nav-bar.html' %}
         
-        <header style="margin-top: 4rem;" >
-            <section class="mensajes">
+        <header>
+            <!-- <section class="mensajes">
                 {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
-                            <li>{{ message }}</li>
+                        <li {% if message.tags %} class="{{ message.tags}}" {% endif %}>{{ message }}</li>
                         {% endfor %}
                     </ul>
                 {% endif %}
+            </section> -->
+            <section>
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible shadow fade show" role="alert">
+                        <button type="button" class="btn close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message | safe }}
+                    </div>
+                {% endfor %}
             </section>
             {% block header %} {% endblock %}
 
@@ -35,31 +45,27 @@
         <main>
             {% block content %} {% endblock %}
         </main>
-        <div class="contenido-foot">
-            <footer>
-                <section class="info-footer">
-                        <div class="ubic-foot">
-                            <nav>
-                                <div class="titulo">Encontranos en</div>
-                                <div class="linea"></div>           
-                                <div class="boton"><a href=""> <i class='bx bx-store-alt' style='color:#17420b'></i></a>  Direccion: Av de Mayo 111</div>
-                                <div class="boton"><a href=""> <i class='bx bx-phone-call' style='color:#17420b'></i></a>  Telefono: 3335555577</div>
-                            </nav>
-                        </div>
-                        <div class="redes-foot">
-                            <nav>
-                                <div class="titulo">Nuestras redes</div>
-                                <div class="linea"></div>           
-                                <div class="boton"><a href=""> <i class='bx bxl-instagram-alt' style='color:#17420b'></i></a>  Instagram</div>
-                                <div class="boton"><a href=""> <i class='bx bxl-whatsapp' style='color:#17420b'></i></a>  Whatsapp</div>
-                                <div class="boton"><a href=""> <i class='bx bxl-linkedin-square' style='color:#17420b'></i></a>  Linkedin</div>
-                            </nav>
-                        </div>
-                    </section>
-                <article id="legales-foot">
-                    <p>2023-Buenos Aires.Todos los derechos reservados</p>
-                </article>
-            </div>    
+        <footer class="contenido-foot">
+            <section class="info-footer">
+                    <div>
+                        <nav>
+                            <div><a href=""> <i class='bx bx-store-alt icono-footer'></i></a> <p class="destaque-foot">Direccion:</p> Av de Mayo 111</div>
+                            <div><a href=""> <i class='bx bx-phone-call icono-footer'></i></a> <p class="destaque-foot">Telefono:</p> 33555577</div>
+                        </nav>
+                    </div>
+                    <div>
+                        <nav>
+                            <div><a href=""> <i class='bx bxl-instagram-alt icono-footer' ></i></a> <p class="destaque-foot">Instagram</p></div>
+                            <div><a href=""> <i class='bx bxl-whatsapp icono-footer'></i></a> <p class="destaque-foot">Whatsapp</p></div>
+                            <!-- <div><a href=""> <i class='bx bxl-linkedin-square icono-footer'></i></a> <p class="destaque-foot">Linkedin</p></div> -->
+                        </nav>
+                    </div>
+            </section>
+            <article>
+                    <p class="legales-foot">2023-Buenos Aires.Todos los derechos reservados</p>
+            </article>
+  
         </footer>
+    {% block extra_js %} {% endblock %}
     </body>
 </html>

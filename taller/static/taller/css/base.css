@@ -1,5 +1,30 @@
+*{
+    margin: 0;                     /* buena práctica: resetear */
+    padding: 0;                    /* buena práctica: resetear */
+                                   /* setear fuentes y por último sans-serif */
+/*    font-size: medium;  */
+    box-sizing: border-box;
+    user-select: none;
+ }
+
 body{
     display: relative;   /* Para scroll con header fijo */
+}
+
+.mensaje_exitoso{
+    background-color: lightgreen;
+    width: 100%;
+}
+
+.titulo_pagina {
+    margin-left: 1%;
+    margin-bottom: 0.8rem;
+    color: #5c5b5b; /* rgb(221, 126, 10); */
+}
+.subtitulo_pagina {
+    margin-left: 1%;
+    margin-bottom: 0.4rem;
+    color: #5c5b5b;
 }
 
 header{
@@ -29,10 +54,9 @@ main{
 
 footer {
     /* border:3px red solid; */
+    /* margin-top: 0.2rem; */
     background-color: #605e5f !important;;
-    text-align: center ;
-    margin: auto;
-    
+    padding-top: 0.3rem;
 }
 
 .contenido-foot{
@@ -42,4 +66,18 @@ footer {
 .info-footer{
     display: flex;
     justify-content: space-around;
+}
+
+.icono-footer{
+    color: bisque;    /*#17420b */
+    font-weight: bold;
+}
+
+.legales-foot{
+    text-align: center;
+}
+
+.destaque-foot{
+    font-weight: bold;
+    display: inline;
 }
