@@ -53,10 +53,20 @@ def cursos(request):
     context = { 'cursos': ListadoCursos }
     return render(request,"taller/cursos.html",context)
 
-def alumnos(request):
-    context = { 'pagina' : 'taller/alumnos.html',
+def alta_alumnos(request):
+    context = { 'pagina' : 'Alta de alumnos',
               }
-    return render(request,'taller/alumnos.html',context)
+    return render(request,'taller/alta_alumnos.html',context)
+
+def cons_alumnos(request):
+    context = { 'pagina' : 'Consulta de alumnos',
+              }
+    return render(request,'taller/cons_alumnos.html',context)
+
+def cons_cursos(request):
+    context = { 'pagina' : 'Consulta de cursos',
+              }
+    return render(request,'taller/cons_cursos.html',context)
 
 def inscripcion(request, id_curso=None):
     if request.method == 'POST':
@@ -120,6 +130,7 @@ def contacto(request,motivo=None):
             else:
                return redirect(reverse('cursos'))         
         else:
+            print (contacto_form.errors)
             messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
     else:
         #GET

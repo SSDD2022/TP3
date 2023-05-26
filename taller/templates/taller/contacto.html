@@ -4,7 +4,7 @@
 {% block title %}Inscipcion{% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'taller/css/contacto.css' %}">
+  <link rel="stylesheet" href="{% static 'taller/css/form.css' %}">
 {% endblock %}
 
 {% block header %}
@@ -17,15 +17,25 @@
   <section class="form-container">
       {% csrf_token %}
       <div class="labeles">{{form.motivo.label}}:</div>
-        {{form.motivo}}
+      <div>{{form.motivo}}</div>
+      <div class="form-error">{{form.motivo.errors}}</div>
+
       <div class="labeles">{{form.nombre.label}}:</div>
-        {{form.nombre}}
+      <div>{{form.nombre}}</div>
+      <div class="form-error">{{form.nombre.errors}}</div>
+
       <div class="labeles">{{form.apellido.label}}:</div>
-        {{form.apellido}}
+      <div>{{form.apellido}}</div>
+      <div class="form-error">{{form.apellido.errors}}</div>
+
       <div class="labeles">{{form.mail.label}}:</div>
-        {{form.mail}}
+      <div>{{form.mail}}</div>
+      <div class="form-error">{{form.mail.errors}}</div>
+
       <div class="labeles">{{form.comentario.label}}:</div>
-        {{form.comentario}}
+      <div>{{form.comentario}}</div>
+      <div class="form-error">{{form.comentario.errors}}</div>
+      
     <input type="submit" name="f_enviar"   id="f_enviar"   value="Enviar" class="botones">
   </section>
 </form>

@@ -1,6 +1,6 @@
 .form-container {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 25% 50% 25%;
     grid-template-rows: auto;
     grid-auto-flow: row;
     grid-row-gap: 0.5rem;
@@ -21,6 +21,10 @@
     font-weight: bold;
     color: #5c5b5b;
 }
+.form-container .form-error {
+    font-weight: normal;
+    color: red;
+}
 .form-containter .botones {
     color: white; 
     font-size: medium; 
@@ -33,6 +37,7 @@ input, textarea, select {
     border-radius: 4px;
     box-sizing: border-box;
     padding-left: 0.8rem;
+    width: 100%;
 }
 input:focus, textarea:focus, select:focus,
 input:hover, textarea:hover, select:hover  {

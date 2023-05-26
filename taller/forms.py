@@ -39,14 +39,17 @@ class Contacto(forms.Form):
     comentario = forms.CharField(max_length=500,widget=forms.Textarea(attrs={"rows":"5"}),required=False)
     def clean_mail (self):
         EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
-        mail = self.cleaned_data.get('mail')
+        mail = self.cleaned_data["mail"]
         if mail and not re.match(EMAIL_REGEX, mail):
-            raise ValidationError ('Mail inválido')
+            error_dict = { 'mail': 'Mail inválido' }
+            raise forms.ValidationError (error_dict)
         return self.cleaned_data.get('mail')
     def clean (self):
         motivo = self.cleaned_data["motivo"]
         comentario = self.cleaned_data["comentario"]
         if motivo != 'SUS' and len(comentario) == 0:
-           self.fields['comentario'].widget.attrs['placeholder'] = 'Por favor completa el comentario ...'
-           raise ValidationError ( 'Por favor completa el comentario ...')
+#          self.fields['comentario'].widget.attrs['placeholder'] = 'Por favor completa el comentario ...'
+            error_dict = { 'comentario': 'Ingresa el comentario' }
+            raise forms.ValidationError (error_dict)
+        return self.cleaned_data
 
