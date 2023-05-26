@@ -125,7 +125,7 @@ def contacto(request,motivo=None):
                                  mail=mail,comentario=comentario)
             contacto.save()
             messages.add_message(request, messages.SUCCESS, 'Mensaje recibido correctamente')
-            if motivo == 'SUG':
+            if motivo != 'INS':
                return redirect(reverse('taller'))
             else:
                return redirect(reverse('cursos'))         
@@ -138,3 +138,8 @@ def contacto(request,motivo=None):
 
     context = {'form': contacto_form}
     return render(request,"taller/contacto.html",context)
+
+def gestionar_contactos(request):
+    context = { 'pagina' : 'Consulta de contactos',
+              }
+    return render(request,'taller/gestionar_contactos.html',context)

@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from taller.validaciones import ValMail
 import re
+
 class Inscripcion_form(forms.Form):
         CURSOS = ((1, 'Cerámica para niños'),
                   (2, 'Cerámica para adultos'),
@@ -38,9 +40,8 @@ class Contacto(forms.Form):
     mail = forms.EmailField(max_length=30,label="Email", required=True)
     comentario = forms.CharField(max_length=500,widget=forms.Textarea(attrs={"rows":"5"}),required=False)
     def clean_mail (self):
-        EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
         mail = self.cleaned_data["mail"]
-        if mail and not re.match(EMAIL_REGEX, mail):
+        if mail and not ValMail(mail):
             error_dict = { 'mail': 'Mail inválido' }
             raise forms.ValidationError (error_dict)
         return self.cleaned_data.get('mail')

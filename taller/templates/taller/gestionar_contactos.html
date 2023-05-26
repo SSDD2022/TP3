@@ -1,0 +1,42 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block title %}Inscipcion{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/form.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h3 class="titulo_pagina">Contactos</h3>
+    <h5 class="subtitulo_pagina">Revisión</h5>
+{% endblock %} 
+
+{% block content %}
+<form action="" method="POST">
+  <section class="form-container">
+      {% csrf_token %}
+      <div class="labeles">{{form.motivo.label}}:</div>
+      <div>{{form.motivo}}</div>
+      <div class="form-error">{{form.motivo.errors}}</div>
+
+      <div class="labeles">{{form.nombre.label}}:</div>
+      <div>{{form.nombre}}</div>
+      <div class="form-error">{{form.nombre.errors}}</div>
+
+      <div class="labeles">{{form.apellido.label}}:</div>
+      <div>{{form.apellido}}</div>
+      <div class="form-error">{{form.apellido.errors}}</div>
+
+      <div class="labeles">{{form.mail.label}}:</div>
+      <div>{{form.mail}}</div>
+      <div class="form-error">{{form.mail.errors}}</div>
+
+      <div class="labeles">{{form.comentario.label}}:</div>
+      <div>{{form.comentario}}</div>
+      <div class="form-error">{{form.comentario.errors}}</div>
+      
+    <input type="submit" name="f_enviar"   id="f_enviar"   value="Enviar" class="botones">
+  </section>
+</form>
+{% endblock %} 
