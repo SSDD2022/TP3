@@ -1,5 +1,5 @@
 from django.db import models
-#from datetime import datetime
+from datetime import datetime
 from django import utils
 
 
@@ -33,8 +33,12 @@ class CursoDescripcion (models.Model):
                                    #validators=NotImplemented
                                    )
 
+MOT_Contacto = (('SUG', 'Sugerencia'),
+                ('CON', 'Consulta'),
+                ('SUS', 'Suscripción')
+               ) 
 class Contacto (models.Model):
-    motivo = models.CharField(max_length=3,verbose_name='Motivo',
+    motivo = models.CharField(max_length=3,verbose_name='Motivo', choices=MOT_Contacto,
                               blank=False,null=False,help_text='Motivo del contacto') 
     nombre = models.CharField(max_length=30,verbose_name='Nombre',
                               blank=False,null=False,help_text='Nombre')
@@ -52,6 +56,12 @@ class Contacto (models.Model):
                              )
     revisado = models.BooleanField(verbose_name='Revisado',
                              blank=False,null=False,help_text='Revisado',default=False)
+    @property
+    def motivo_desc (self):
+        for mot in Contacto.motivo.field.choices:
+           if mot[0] == self.motivo:
+               return mot[1]
+        return self.motivo
 
 class Alumno(models.Model):
     alumno_id = models.IntegerField(verbose_name='Alumno',primary_key=True,auto_created=False,

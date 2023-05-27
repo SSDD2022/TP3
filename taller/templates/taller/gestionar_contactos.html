@@ -4,7 +4,7 @@
 {% block title %}Inscipcion{% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'taller/css/form.css' %}">
+  <link rel="stylesheet" href="{% static 'taller/css/gestionar_contactos.css' %}">
 {% endblock %}
 
 {% block header %}
@@ -13,30 +13,34 @@
 {% endblock %} 
 
 {% block content %}
-<form action="" method="POST">
+
   <section class="form-container">
-      {% csrf_token %}
-      <div class="labeles">{{form.motivo.label}}:</div>
-      <div>{{form.motivo}}</div>
-      <div class="form-error">{{form.motivo.errors}}</div>
 
-      <div class="labeles">{{form.nombre.label}}:</div>
-      <div>{{form.nombre}}</div>
-      <div class="form-error">{{form.nombre.errors}}</div>
+      <div></div>
+      <div class="labeles">Fecha</div>
+      <div class="labeles">Motivo</div>
+      <div class="labeles">Nombre</div>
+      <div class="labeles">Apellido</div>
+      <div class="labeles">Mail</div>
+      <div class="labeles">Comentario</div>   
 
-      <div class="labeles">{{form.apellido.label}}:</div>
-      <div>{{form.apellido}}</div>
-      <div class="form-error">{{form.apellido.errors}}</div>
-
-      <div class="labeles">{{form.mail.label}}:</div>
-      <div>{{form.mail}}</div>
-      <div class="form-error">{{form.mail.errors}}</div>
-
-      <div class="labeles">{{form.comentario.label}}:</div>
-      <div>{{form.comentario}}</div>
-      <div class="form-error">{{form.comentario.errors}}</div>
+      {% for form in object_list %}
+        <form action="{% url 'cambiar_contacto' form.id %}" method="POST"> 
+           {% csrf_token %}
+           <div>
+              {% if not form.revisado %}
+                <button type="submit" class="btn btn-info">Pend</button>
+              {% endif %}
+           </div>
+        </form>
+        <div class="f_fecha">{{form.fecha|date:'d-m-y'}}</div>
+        <div class="f_motivo">{{form.motivo_desc}}</div>
+        <div class="f_nombre">{{form.nombre}}</div>
+        <div class="f_apellido">{{form.apellido}}</div>
+        <div class="f_mail">{{form.mail}}</div>
+        <div class="f_comentario">{{form.comentario}}</div>
       
-    <input type="submit" name="f_enviar"   id="f_enviar"   value="Enviar" class="botones">
+      {% endfor %}
   </section>
-</form>
+
 {% endblock %} 

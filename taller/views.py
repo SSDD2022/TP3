@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
+from django.views.generic import ListView, UpdateView
 from . import classes
 from . import forms
 from taller.models import Curso, CursoDescripcion, Trabajo, Contacto
@@ -139,7 +140,15 @@ def contacto(request,motivo=None):
     context = {'form': contacto_form}
     return render(request,"taller/contacto.html",context)
 
-def gestionar_contactos(request):
-    context = { 'pagina' : 'Consulta de contactos',
-              }
-    return render(request,'taller/gestionar_contactos.html',context)
+class GestionarContactos(ListView):
+    model=Contacto
+    context_object_name = 'Contacto'
+    template_name = 'taller/gestionar_contactos.html'
+    fields=["id","revisado","fecha","motivo","nombre","apellido","mail","comentario"]
+    ordering = ["revisado","fecha"]
+
+def cambiar_contacto(request, id):
+    cont = Contacto.objects.get(id=int(id))
+    cont.revisado = True
+    cont.save()
+    return redirect(reverse('gestionar_contactos')) 
