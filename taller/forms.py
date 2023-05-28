@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from taller.validaciones import ValMail
+from django.conf import settings
+from taller.validaciones import ValMail, ValCelular, ValEdadAlumno 
+from taller.models import Alumno
 import re
 
 class Inscripcion_form(forms.Form):
@@ -54,3 +56,24 @@ class Contacto(forms.Form):
             raise forms.ValidationError (error_dict)
         return self.cleaned_data
 
+class AltaAlumnoForm(forms.ModelForm):
+    class Meta:
+        model=Alumno
+        fields=["nombre","apellido","fecha_nacimiento","mail","celular"]
+        widgets = { "fecha_nacimiento" : forms.DateInput(format='%d-%m-%Y', attrs={'class':'form-control', 'placeholder':'Fecha de nacimiento', 'type':'date'}),
+                  }
+    def clean_mail (self):
+        mail = self.cleaned_data["mail"]
+        if not mail or not ValMail(mail):
+            raise forms.ValidationError ('Mail inválido')
+        return self.cleaned_data.get('mail')  
+    def clean_celular (self):
+        celular = self.cleaned_data["celular"]
+        if not celular or not ValCelular(celular):
+            raise forms.ValidationError ('Formato: (11) 11111111')
+        return self.cleaned_data.get('celular')
+    def clean_fecha_nacimiento(self):
+        fecha = self.cleaned_data["fecha_nacimiento"]
+        if not fecha or not ValEdadAlumno (fecha):
+            raise forms.ValidationError ('Aún no tiene 8 años')
+        return self.cleaned_data.get('fecha_nacimiento')        

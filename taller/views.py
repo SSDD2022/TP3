@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, CreateView
+from django.forms import ModelForm
 from . import classes
 from . import forms
 from taller.models import Curso, CursoDescripcion, Trabajo, Contacto
+from taller.forms import AltaAlumnoForm
 
 
 # Create your views here.
@@ -54,10 +56,7 @@ def cursos(request):
     context = { 'cursos': ListadoCursos }
     return render(request,"taller/cursos.html",context)
 
-def alta_alumnos(request):
-    context = { 'pagina' : 'Alta de alumnos',
-              }
-    return render(request,'taller/alta_alumnos.html',context)
+
 
 def cons_alumnos(request):
     context = { 'pagina' : 'Consulta de alumnos',
@@ -131,7 +130,6 @@ def contacto(request,motivo=None):
             else:
                return redirect(reverse('cursos'))         
         else:
-            print (contacto_form.errors)
             messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
     else:
         #GET
@@ -152,3 +150,20 @@ def cambiar_contacto(request, id):
     cont.revisado = True
     cont.save()
     return redirect(reverse('gestionar_contactos')) 
+
+def alta_alumno(request):
+    context ={}
+
+    if request.method == "POST":
+        form = AltaAlumnoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Alumno dado de alta correctamente')
+            return redirect(reverse("alta_alumno"))
+        else:
+            messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
+    else:
+        form = AltaAlumnoForm()
+
+    context['form'] = form
+    return render(request, 'taller/alta_alumnos.html', context)

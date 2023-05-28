@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django import utils
+from taller.validaciones import ValCelular, ValMail, ValEdadAlumno
 
 
 # Create your models here.
@@ -64,10 +65,7 @@ class Contacto (models.Model):
         return self.motivo
 
 class Alumno(models.Model):
-    alumno_id = models.IntegerField(verbose_name='Alumno',primary_key=True,auto_created=False,
-                                   blank=False,null=False,help_text='Código de alumno',
-                                   #validators=NotImplemented
-                                   )
+    alumno_id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50,verbose_name='Nombre',
                               blank=False,null=False,help_text='Nombre del alumno',
                               #validators=NotImplemented
@@ -78,15 +76,21 @@ class Alumno(models.Model):
                              )
     fecha_nacimiento = models.DateField(verbose_name="Nacimiento",
                                         blank=False,null=False,help_text='Fecha de nacimiento',
-                                        #validators=NotImplemented
+                                        validators=[ValEdadAlumno]
                                        )
     mail = models.EmailField(max_length=30,verbose_name='Mail',
-                             blank=False,null=False,help_text='Mail de contacto')
+                             blank=False,null=False,help_text='Mail de contacto',
+                             validators=[ValMail])
     celular = models.CharField(max_length=20,verbose_name='Celular',
                                blank=False,null=False,help_text='Celular de contacto',
-                               #validators=NotImplemented
-                              )  #+54 9 11 1111-2222
-
+                               validators=[ValCelular]
+                              ) 
+    # def obtener_verbose_name(self,campo):
+    #     return (Alumno._meta.get_field(campo).verbose_name)
+    # @property
+    # def nombre_label (self):
+    #     return self.obtener_verbose_name('nombre')
+    
 class Turno (models.Model):
     class Experiencia(models.TextChoices):
         SE = "SE", "Sin Experiencia"
@@ -96,11 +100,7 @@ class Turno (models.Model):
         N = "N", "Niños"
         J = "J", "Jóvenes"
         A = "A", "Adultos"
-
-    turno_id = models.IntegerField(verbose_name='Turno',primary_key=True,auto_created=False,
-                                   blank=False,null=False,help_text='Código de turno',
-                                   #validators=NotImplemented
-                                  )
+    turno_id = models.AutoField(primary_key=True)
     curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
     descripción = models.CharField(max_length=50,verbose_name='Dictado',
                                blank=False,null=False,help_text='Datos del turno',

@@ -6,7 +6,7 @@ Bajas: Fernandez, Font
 Exposiciones Parciales:
 √ Semana del 17/04 al 21/04 – Fecha 15 según Programa.
 √ Semana del 01/05 al 05/05 – Fecha 20 según Programa.
-• Semana del 22/05 al 29/05 – Fecha 25 según Programa.
+√ Semana del 22/05 al 29/05 – Fecha 25 según Programa.
 • Semana del 05/06 al 09/06 – Fecha 30 según Programa.
 
 Exposición Final
@@ -28,15 +28,15 @@ El PIG deberá ser un sitio web con temática a elección, orientado a la gesti�
 √ • Debe existir al menos un filtro aplicado.
 √ • Debe existir al menos un template que utilice archivos estáticos (js, css, etc).
 
-7. Se deben utilizar Django Forms que cumplan con las siguientes características:
+√ 7. Se deben utilizar Django Forms que cumplan con las siguientes características:
 √ • Al menos un formulario debe poseer validaciones en el front-end y en el back-end
 √ • Debe haber al menos un formulario asociado a un template.
 √ • Debe haber al menos un formulario basado en clases.
-• Debe haber al menos un formulario asociado a un modelo.
+√ Debe haber al menos un formulario asociado a un modelo.
 
-8. Deben existir al menos dos modelos distintos.
+√ 8. Deben existir al menos dos modelos distintos.
 
-9. En los modelos generados, debe haber al menos una relación de uno a muchos y una relación de muchos a muchos.
+√ 9. En los modelos generados, debe haber al menos una relación de uno a muchos y una relación de muchos a muchos.
 
 √ 10. El proyecto debe funcionar utilizando un servidor de base de datos local dentro de los soportados (en el curso se recomienda PostgreSQL), y debe poseer las migraciones necesarias para su funcionamiento (no se permite utilizar SQLLite).
 
