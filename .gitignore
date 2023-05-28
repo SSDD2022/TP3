@@ -139,3 +139,7 @@ GitHub.sublime-settings
 # entorno Vale
 
 taller/proyecto2023venv/
+
+# Migraciones (agregado por Silvia)
+taller/migrations/
+
