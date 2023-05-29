@@ -16,12 +16,12 @@ urlpatterns = [
    path('contacto/<motivo>/', views.contacto, name="contacto"),
    path('contacto/', views.contacto, name="contacto"),
    path('alta_alumno/', views.alta_alumno,name="alta_alumno"),
-   path('cons_alumnos/', views.cons_alumnos,name="cons_alumnos"),
-   path('cons_cursos/', views.cons_cursos,name="cons_cursos"),
+   path('gestionar_alumnos/', views.GestionarAlumnos.as_view(), name = 'gestionar_alumnos'),
    path('gestionar_contactos/', views.GestionarContactos.as_view(),name="gestionar_contactos"),
    path('cambiar_contacto/<int:id>/',views.cambiar_contacto, name='cambiar_contacto'),
    path('alta_turno/', views.alta_turno, name = 'alta_turno'),
    path('gestionar_turnos/', views.GestionarTurnos.as_view(), name = 'gestionar_turnos'),
-   ]
+   path('cons_alumno/<int:id>/', views.cons_alumno, name = 'cons_alumno'),
+]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

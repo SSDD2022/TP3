@@ -1,6 +1,6 @@
 .form-container {
     display: grid;
-    grid-template-columns: 27% 24% 5% 15% 15% 5% 8%;
+    grid-template-columns: 8% 20% 20% 10% 25% 15%;
     grid-template-rows: auto;
     grid-auto-flow: row;
     grid-row-gap: 0.2rem;
@@ -16,7 +16,7 @@
     padding: 0.5rem;
  /*   background-color: #bfc7f3; /* rgb(193, 214, 241);  /* bisque; */
 }
-.f_campo {
+.f_revisado, .f_fecha, .f_motivo, .f_nombre, .f_apellido, .f_mail, .f_comentario {
     /* grid-area: revisado-area; */
     width: 100%;
     background-color: #bfc7f3; 
@@ -86,4 +86,7 @@ input[type=submit]:hover {
     font-weight: bold;
     color: blue;
     list-style: none;
+}
+.centrado {
+    text-align: center;
 }

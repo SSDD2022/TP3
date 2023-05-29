@@ -142,6 +142,10 @@ class Turno (models.Model):
            if e[0] == self.experiencia:
                return e[1]
         return self.experiencia
+    @property
+    def vacantes (self):
+        return self.cupo - Inscripcion.objects.filter(turno_id = self.turno_id).count()
+
 
 class Inscripcion (models.Model):
     # Primary key generada automaticamente

@@ -14,12 +14,10 @@
         <a class="nav-link" href="{% url 'galeria' %}">Galería</a>
       </li>
       <li class="nav-item li-padre">
-        <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">Alumnos<span class="caret"></span></a>
+        <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">Gestión<span class="caret"></span></a>
         <ul class="dropdown-menu sub-menu" aria-labelledby="dropdownMenuButton" >
-          <li><a class="nav-item nav-link" href="{% url 'alta_alumno' %}">Alta</a></li>
-          <li><a class="nav-item nav-link" href="{% url 'cons_alumnos' %}">Consulta</a></li>
+          <li><a class="nav-item nav-link" href="{% url 'gestionar_alumnos' %}">Alumnos</a></li>
           <li><a class="nav-item nav-link" href="{% url 'gestionar_contactos' %}">Contactos</a></li>
-          <li><a class="nav-item nav-link" href="{% url 'cons_cursos' %}">Inscripciones</a></li>
           <li><a class="nav-item nav-link" href="{% url 'gestionar_turnos' %}">Turnos</a></li>
         </ul>
       </li>

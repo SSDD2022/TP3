@@ -6,7 +6,7 @@ from django.views.generic import ListView, UpdateView, CreateView
 from django.forms import ModelForm
 from . import classes
 from . import forms
-from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno
+from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno, Alumno
 from taller.forms import AltaAlumnoForm, AltaTurnoForm
 
 
@@ -59,10 +59,10 @@ def cursos(request):
 
 
 
-def cons_alumnos(request):
+def cons_alumno(request, id):
     context = { 'pagina' : 'Consulta de alumnos',
               }
-    return render(request,'taller/cons_alumnos.html',context)
+    return render(request,'taller/cons_alumno.html',context)
 
 def cons_cursos(request):
     context = { 'pagina' : 'Consulta de cursos',
@@ -196,3 +196,9 @@ class GestionarTurnos(ListView):
     template_name = 'taller/gestionar_turnos.html'
     exclude=["id","alumnos"]
     ordering = ["-anio","curso_id","destinatario","experiencia","-cupo"]
+
+class GestionarAlumnos(ListView):
+    model=Alumno
+    context_object_name = 'Alumno'
+    template_name = 'taller/gestionar_alumnos.html'
+    ordering = ["nombre","apellido"]

@@ -1,7 +1,7 @@
 {% extends 'taller/base.html' %}
 {% load static %}
 
-{% block title %}Inscipcion{% endblock %}
+{% block title %}Gestión de Turnos{% endblock %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'taller/css/gestionar_turnos.css' %}">
@@ -22,6 +22,7 @@
       <div class="labeles">Destinatarios</div>
       <div class="labeles">Experiencia</div>
       <div class="labeles">Cupo</div>   
+      <div class="labeles">Vacantes</div> 
  
       {% for form in object_list %}
         <div class="f_campo">{{form.curso_id}}</div>
@@ -30,6 +31,7 @@
         <div class="f_campo">{{form.destinatario_desc}}</div>
         <div class="f_campo">{{form.experiencia_desc}}</div>
         <div class="f_campo">{{form.cupo}}</div>
+        <div class="f_campo">{{form.vacantes}}</div>
       
       {% endfor %}
   </section>

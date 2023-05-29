@@ -1,0 +1,43 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block title %}Gestión de Alumnos{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/gestionar_alumnos.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h3 class="titulo_pagina">Gestión de Alumnos</h3>
+    <h5 class="subtitulo_pagina"><a href="{% url 'alta_alumno' %}" >Nuevo</a></h5>
+{% endblock %} 
+
+{% block content %}
+
+  <section class="form-container">
+
+      <div class="labeles">Cursos</div>
+      <div class="labeles">Nombre</div>
+      <div class="labeles">Apellido</div>
+      <div class="labeles">Fecha Nac</div>
+      <div class="labeles">Mail</div>
+      <div class="labeles">Celular</div>   
+
+      {% for form in object_list %}
+
+        <form action="{% url 'cons_alumno' form.alumno_id %}" method="POST"> 
+           {% csrf_token %}
+           <div class="centrado">
+              <button type="submit" class="btn btn-info">+</button>
+           </div>
+        </form>
+        <div class="f_nombre">{{form.nombre}}</div>
+        <div class="f_apellido">{{form.apellido}}</div>
+        <div class="f_fecha">{{form.fecha_nacimiento|date:'d-m-y'}}</div>
+        <div class="f_mail">{{form.mail}}</div>
+        <div class="f_comentario">{{form.celular}}</div>
+      
+      {% endfor %}
+  </section>
+
+{% endblock %} 

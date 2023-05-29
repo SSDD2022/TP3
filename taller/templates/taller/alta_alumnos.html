@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="{% static 'taller/css/form.css' %}">
 {% endblock %}
 
-{% block title %}Alta de alumnos{% endblock %}
+{% block title %}Gestión de alumnos{% endblock %}
 
 {% block header %}
-   <h3 class="titulo_pagina">Alumnos</h3>
-   <h5 class="subtitulo_pagina">Gestión de alumnos</h5>
+   <h3 class="titulo_pagina">Nuevo Alumno</h3>
+   <h5 class="subtitulo_pagina"><a href="{% url 'gestionar_alumnos' %}" >Volver</a></h5>
 {% endblock %} 
 
 {% block content %}
