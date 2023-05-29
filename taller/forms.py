@@ -1,8 +1,10 @@
 from django import forms
+from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.conf import settings
+from django import utils
 from taller.validaciones import ValMail, ValCelular, ValEdadAlumno 
-from taller.models import Alumno
+from taller.models import Alumno, Turno, Curso
 import re
 
 class Inscripcion_form(forms.Form):
@@ -77,3 +79,30 @@ class AltaAlumnoForm(forms.ModelForm):
         if not fecha or not ValEdadAlumno (fecha):
             raise forms.ValidationError ('Aún no tiene 8 años')
         return self.cleaned_data.get('fecha_nacimiento')        
+
+class AltaTurnoForm(forms.ModelForm):
+    class Meta:
+        model=Turno
+        exclude=["turno_id","alumnos"]
+    def clean(self):
+        Ok = True
+        # Validación del cup
+        cupo = self.cleaned_data["cupo"]
+        if not cupo or cupo <= 0:
+            Ok = False  # raise forms.ValidationError ('Informar el cupo')
+      # return self.cleaned_data.get('cupo')    
+        # Validación del anio
+        anio = self.cleaned_data["anio"]
+        if not anio or anio < utils.timezone.now().year:
+            Ok = False  # raise forms.ValidationError ('Año actual o futuro') 
+      # return self.cleaned_data.get('anio')  
+        if not Ok:
+            raise forms.ValidationError ('')
+
+  
+
+        
+
+
+
+         

@@ -16,15 +16,15 @@
 <form action="" method="POST">
     <section class="form-container">
         {% csrf_token %}
-        <div class="labeles">Nombre:</div>
+        <div class="labeles">{{form.nombre.label}}:</div>
         <div>{{form.nombre}}</div>
         <div class="form-error">{{form.nombre.errors}}</div>
  
-        <div class="labeles">Apellido:</div>
+        <div class="labeles">{{form.apellido.label}}</div>
         <div>{{form.apellido}}</div>
         <div class="form-error">{{form.apellido.errors}}</div>
   
-        <div class="labeles">Fecha de nacimiento:</div>
+        <div class="labeles">{{form.fecha_nacimiento.label}}:</div>
         <div>{{form.fecha_nacimiento}}</div>
         <div class="form-error">{{form.fecha_nacimiento.errors}}</div>
   
@@ -32,7 +32,7 @@
         <div>{{form.mail}}</div>
         <div class="form-error">{{form.mail.errors}}</div>
   
-        <div class="labeles">Celular:</div>
+        <div class="labeles">{{form.celular.label}}:</div>
         <div>{{form.celular}}</div>
         <div class="form-error">{{form.celular.errors}}</div>
 

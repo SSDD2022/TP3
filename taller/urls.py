@@ -20,6 +20,8 @@ urlpatterns = [
    path('cons_cursos/', views.cons_cursos,name="cons_cursos"),
    path('gestionar_contactos/', views.GestionarContactos.as_view(),name="gestionar_contactos"),
    path('cambiar_contacto/<int:id>/',views.cambiar_contacto, name='cambiar_contacto'),
+   path('alta_turno/', views.alta_turno, name = 'alta_turno'),
+   path('gestionar_turnos/', views.GestionarTurnos.as_view(), name = 'gestionar_turnos'),
    ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

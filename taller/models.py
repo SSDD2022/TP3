@@ -18,6 +18,8 @@ class Curso (models.Model):
                               blank=False,null=False,help_text='Imagen curso',
                               #validators=NotImplemented
                               )
+    def __str__(self):
+        return self.titulo
 
 
 class CursoDescripcion (models.Model):
@@ -101,33 +103,45 @@ class Turno (models.Model):
         J = "J", "Jóvenes"
         A = "A", "Adultos"
     turno_id = models.AutoField(primary_key=True)
-    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE,verbose_name='Curso')
     descripción = models.CharField(max_length=50,verbose_name='Dictado',
-                               blank=False,null=False,help_text='Datos del turno',
+                               blank=False,null=False,#help_text='Datos del turno',
                                #validators=NotImplemented
                               )  # lunes y jueves de 8 a 10
                                  # martes de 18 a 20 y sábados de 10 a 12
-    anio = models.IntegerField(verbose_name='Año',unique=False,auto_created=False,
-                               blank=False,null=False,help_text='Año de dictado',
+    anio = models.IntegerField(verbose_name='Año de dictado',unique=False,auto_created=False,
+                               blank=False,null=False,#help_text='Año de dictado',
                                #validators=NotImplemented
                               )
     destinatario = models.CharField(max_length=1,verbose_name='Destinatarios',
-                               blank=False,null=False,help_text='Destinatarios',
+                               blank=False,null=False,#help_text='Destinatarios',
                                choices=Edad.choices,
                                default=Edad.J,
                                #validators=NotImplemented
                               )
     experiencia = models.CharField(max_length=2,verbose_name='Experiencia',
-                               blank=False,null=False,help_text='Experiencia',
+                               blank=False,null=False,#help_text='Experiencia',
                                choices=Experiencia.choices,
                                default=Experiencia.SE,
                                #validators=NotImplemented
                               )
     cupo = models.IntegerField(verbose_name='Cupo',unique=False,auto_created=False,
-                               blank=False,null=False,help_text='Cupo',
+                               blank=False,null=False,#help_text='Cupo',
                                #validators=NotImplemented
                               )
     alumnos = models.ManyToManyField(Alumno,through='Inscripcion')
+    @property
+    def destinatario_desc (self):
+        for d in Turno.destinatario.field.choices:
+           if d[0] == self.destinatario:
+               return d[1]
+        return self.destinatario
+    @property
+    def experiencia_desc (self):
+        for e in Turno.experiencia.field.choices:
+           if e[0] == self.experiencia:
+               return e[1]
+        return self.experiencia
 
 class Inscripcion (models.Model):
     # Primary key generada automaticamente

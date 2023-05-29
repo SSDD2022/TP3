@@ -1,0 +1,37 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block title %}Inscipcion{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/gestionar_turnos.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h3 class="titulo_pagina">Gestión de Turnos</h3>
+    <h5 class="subtitulo_pagina"><a href="{% url 'alta_turno' %}" >Nuevo</a></h5>
+{% endblock %} 
+
+{% block content %}
+
+  <section class="form-container">
+
+      <div class="labeles">Curso</div>
+      <div class="labeles">Dictado</div>
+      <div class="labeles">Año</div>
+      <div class="labeles">Destinatarios</div>
+      <div class="labeles">Experiencia</div>
+      <div class="labeles">Cupo</div>   
+ 
+      {% for form in object_list %}
+        <div class="f_campo">{{form.curso_id}}</div>
+        <div class="f_campo">{{form.descripción}}</div>
+        <div class="f_campo">{{form.anio}}</div>
+        <div class="f_campo">{{form.destinatario_desc}}</div>
+        <div class="f_campo">{{form.experiencia_desc}}</div>
+        <div class="f_campo">{{form.cupo}}</div>
+      
+      {% endfor %}
+  </section>
+
+{% endblock %} 

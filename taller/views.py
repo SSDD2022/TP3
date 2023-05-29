@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django import utils
 from django.urls import reverse
 from django.views.generic import ListView, UpdateView, CreateView
 from django.forms import ModelForm
 from . import classes
 from . import forms
-from taller.models import Curso, CursoDescripcion, Trabajo, Contacto
-from taller.forms import AltaAlumnoForm
+from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno
+from taller.forms import AltaAlumnoForm, AltaTurnoForm
 
 
 # Create your views here.
@@ -167,3 +168,31 @@ def alta_alumno(request):
 
     context['form'] = form
     return render(request, 'taller/alta_alumnos.html', context)
+
+def alta_turno(request):
+    context ={}
+
+    if request.method == "POST":
+        form = AltaTurnoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Turno dado de alta correctamente')
+            return redirect(reverse("alta_turno"))
+        else:
+            messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
+    else:
+        val_inicial={'anio':utils.timezone.now().year}
+        primer_curso = Curso.objects.first()
+        if primer_curso is not None:
+            val_inicial['curso_id'] = primer_curso
+        form = AltaTurnoForm(initial=val_inicial)
+
+    context['form'] = form
+    return render(request, 'taller/alta_turno.html', context)
+
+class GestionarTurnos(ListView):
+    model=Turno
+    context_object_name = 'Turno'
+    template_name = 'taller/gestionar_turnos.html'
+    exclude=["id","alumnos"]
+    ordering = ["-anio","curso_id","destinatario","experiencia","-cupo"]
