@@ -182,7 +182,13 @@ def alta_turno(request):
             messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
     else:
         val_inicial={'anio':utils.timezone.now().year}
-        primer_curso = Curso.objects.first()
+        primer_curso = Curso.objects.filter(titulo__contains='adultos').first()
+        # primer_curso = Curso.objects.first()
+        # if primer_curso is not None:
+        #     primer_curso = Curso.objects.filter(curso_id__gt=primer_curso.curso_id).first()
+        if primer_curso is not None:
+            val_inicial['curso_id'] = primer_curso
+
         if primer_curso is not None:
             val_inicial['curso_id'] = primer_curso
         form = AltaTurnoForm(initial=val_inicial)

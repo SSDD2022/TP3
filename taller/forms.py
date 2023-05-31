@@ -7,6 +7,7 @@ from taller.validaciones import ValMail, ValCelular, ValEdadAlumno
 from taller.models import Alumno, Turno, Curso
 import re
 
+
 class Inscripcion_form(forms.Form):
         CURSOS = ((1, 'Cerámica para niños'),
                   (2, 'Cerámica para adultos'),
@@ -84,20 +85,18 @@ class AltaTurnoForm(forms.ModelForm):
     class Meta:
         model=Turno
         exclude=["turno_id","alumnos"]
-    def clean(self):
-        Ok = True
-        # Validación del cup
+        fields = ["curso_id", "descripción", "anio", "destinatario", "experiencia", "cupo"]
+
+    def clean_cupo(self):
         cupo = self.cleaned_data["cupo"]
         if not cupo or cupo <= 0:
-            Ok = False  # raise forms.ValidationError ('Informar el cupo')
-      # return self.cleaned_data.get('cupo')    
-        # Validación del anio
+            raise forms.ValidationError ('El cupo es positivo')
+        return self.cleaned_data.get('cupo')
+    def clean_anio(self):
         anio = self.cleaned_data["anio"]
         if not anio or anio < utils.timezone.now().year:
-            Ok = False  # raise forms.ValidationError ('Año actual o futuro') 
-      # return self.cleaned_data.get('anio')  
-        if not Ok:
-            raise forms.ValidationError ('')
+            raise forms.ValidationError ('Año actual o futuro') 
+        return self.cleaned_data.get('anio')  
 
   
 
