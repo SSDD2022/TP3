@@ -97,7 +97,9 @@ def agregar_trabajo(request):
             nuevo_trabajo = Trabajo(
                 titulo=agregar_trabajo_form.cleaned_data['titulo'], 
                 autor=agregar_trabajo_form.cleaned_data['autor'], 
-                imagen=agregar_trabajo_form.cleaned_data['imagen']
+                imagen=agregar_trabajo_form.cleaned_data['imagen'],
+                fecha=agregar_trabajo_form.cleaned_data['fecha'],
+                curso_id=agregar_trabajo_form.cleaned_data['curso_id']
             ) 
             nuevo_trabajo.save()
             messages.add_message(request, messages.SUCCESS, 'Trabajo agregado a la galería Correctamente', extra_tags="mensaje_exitoso")

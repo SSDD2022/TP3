@@ -156,7 +156,7 @@ class Inscripcion (models.Model):
 class Trabajo(models.Model):
     imagen = models.FileField(upload_to='galeria/')
     titulo = models.CharField(max_length=100, verbose_name="Título")
-    autor = models.CharField(max_length=100, verbose_name="Autor")
+    autor = models.ForeignKey(Alumno,on_delete=models.CASCADE)
     fecha = models.DateField(verbose_name="Fecha", default='1900-01-01')
-    curso = models.CharField(max_length=100, verbose_name="Curso")
+    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE,verbose_name='Curso')
     destacado = models.BooleanField(default=False)
