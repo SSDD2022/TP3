@@ -87,6 +87,9 @@ class Alumno(models.Model):
                                blank=False,null=False,help_text='Celular de contacto',
                                validators=[ValCelular]
                               ) 
+    
+    def __str__(self):
+        return self.nombre
     # def obtener_verbose_name(self,campo):
     #     return (Alumno._meta.get_field(campo).verbose_name)
     # @property

@@ -77,6 +77,14 @@
     background-color: rgba(0,0,0,0.4);
 }
 
+.descripcion-autor{
+    display: none;
+    color: bisque;
+    background-color: rgb(32, 23, 23);
+    opacity: 75%;
+    border-radius: 10px;
+}
+
 .contenido{
     background-color: #fefefe;
     margin: 15% auto;

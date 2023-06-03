@@ -37,12 +37,11 @@ class agregar_trabajo_form(forms.ModelForm):
     class Meta:
         model = Trabajo
         fields = ('imagen', 'titulo', 'autor', 'fecha', 'curso_id')
+        widgets = { "fecha" : forms.DateInput(format='%d-%m-%Y', attrs={'class':'form-control', 'placeholder':'Fecha de nacimiento', 'type':'date'}),
+                  }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['autor'].queryset = Alumno.objects.all()
-
-    def label_from_instance(self, instance):
-        return instance.nombre
 
 class Contacto(forms.Form):
     MOTIVOS = (('SUG', 'Sugerencia'),
