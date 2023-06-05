@@ -8,6 +8,7 @@ from . import classes
 from . import forms
 from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno, Alumno
 from taller.forms import AltaAlumnoForm, AltaTurnoForm
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 # Create your views here.
@@ -33,6 +34,7 @@ def galeria(request):
     
     return render(request,"taller/galeria.html",context)
 
+@permission_required('taller.cambiar_destacado')
 def cambiar_destacado(request, trabajo_id):
     trabajo = Trabajo.objects.get(id=trabajo_id)
     trabajo.destacado = not trabajo.destacado
@@ -88,6 +90,7 @@ def inscripcion(request, id_curso=None):
     context = {'form': inscripcion_form}
     return render(request,'taller/inscripcion.html' ,context)
 
+@login_required
 def agregar_trabajo(request):
     if request.method == 'POST':
         #POST
