@@ -163,3 +163,6 @@ class Trabajo(models.Model):
     fecha = models.DateField(verbose_name="Fecha", default='1900-01-01')
     curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE,verbose_name='Curso')
     destacado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"OBRA: {self.titulo} - AUTOR: {self.autor.nombre} {self.autor.apellido} - FECHA: {self.fecha}"
