@@ -9,7 +9,7 @@ from . import classes
 from . import forms
 from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno, Alumno, Inscripcion
 from taller.forms import AltaAlumnoForm, AltaTurnoForm, AltaInscripcionForm
-
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 def index(request):
