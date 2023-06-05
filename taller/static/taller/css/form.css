@@ -24,6 +24,7 @@
 .form-container .form-error {
     font-weight: normal;
     color: red;
+    grid-column: 1 / 4;  /* 1 / -1 - 1 / span 3*/
 }
 .form-containter .botones {
     color: white; 

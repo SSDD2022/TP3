@@ -3,8 +3,8 @@ from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.conf import settings
 from django import utils
-from taller.validaciones import ValMail, ValCelular, ValEdadAlumno 
-from taller.models import Alumno, Turno, Curso
+from taller.validaciones import ValMail, ValCelular, ValEdadAlumno, ValEdadGrupo
+from taller.models import Alumno, Turno, Curso, Inscripcion
 import re
 
 
@@ -99,6 +99,22 @@ class AltaTurnoForm(forms.ModelForm):
         return self.cleaned_data.get('anio')  
 
   
+class AltaInscripcionForm(forms.ModelForm):
+    class Meta:
+        model=Inscripcion
+        fields = '__all__'
+
+    def clean(self):
+        t = self.cleaned_data["turno_id"]
+        a = self.cleaned_data["alumno_id"]
+        if t.vacantes <= 0:
+            raise forms.ValidationError ('Turno sin vacantes')
+        if not ValEdadGrupo (t.destinatario,a.fecha_nacimiento):
+            raise forms.ValidationError ('La edad del alumno no aplica a este curso')
+        i = Inscripcion.objects.filter(turno_id=t.turno_id,alumno_id = a.alumno_id).count()
+        if i > 0:
+            raise forms.ValidationError ('Alumno ya inscripto en este curso')
+        return self.cleaned_data
 
         
 

@@ -22,6 +22,10 @@ urlpatterns = [
    path('alta_turno/', views.alta_turno, name = 'alta_turno'),
    path('gestionar_turnos/', views.GestionarTurnos.as_view(), name = 'gestionar_turnos'),
    path('cons_alumno/<int:id>/', views.cons_alumno, name = 'cons_alumno'),
+   path('alta_inscripcion/<int:id>/', views.alta_inscripcion, name = 'alta_inscripcion'),
+   path('cons_turno/<int:id>/', views.cons_turno, name = 'cons_turno'),
+   path('cons_turno/', views.cons_turno, name = 'cons_turno'),
+   path('baja_inscripcion/<int:id>', views.baja_inscripcion, name = 'baja_inscripcion'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

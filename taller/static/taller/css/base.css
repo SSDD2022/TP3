@@ -3,6 +3,7 @@
     padding: 0;                    /* buena práctica: resetear */
                                    /* setear fuentes y por último sans-serif */
 /*    font-size: medium;  */
+    font-family: Georgia, serif;
     box-sizing: border-box;
     user-select: none;
  }
@@ -21,18 +22,22 @@ body{
     margin-left: 1%;
     margin-bottom: 0.8rem;
     color: #5c5b5b; /* rgb(221, 126, 10); */
+    font-weight: bolder;
 }
 .subtitulo_pagina {
     margin-left: 1%;
     margin-bottom: 0.4rem;
     color: #5c5b5b;
+    font-weight: bolder;
 }
 
 header{
     margin-top: 5rem;
     overflow-y: hidden; 
 }
-
+/* .nav-item{
+    font-size: large !important;
+} */
 .nav-link{
     color: bisque !important;
     font-weight: bold !important;

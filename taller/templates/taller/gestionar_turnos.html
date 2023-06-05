@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block header %}
-    <h3 class="titulo_pagina">Gestión de Turnos</h3>
-    <h5 class="subtitulo_pagina"><a href="{% url 'alta_turno' %}" >Nuevo</a></h5>
+    <h3 class="titulo_pagina">Gestión de Turnos e Inscripciones</h3>
+    <h5 class="subtitulo_pagina"><a href="{% url 'alta_turno' %}" >Nuevo Turno</a></h5>
 {% endblock %} 
 
 {% block content %}
@@ -26,12 +26,24 @@
  
       {% for form in object_list %}
         <div class="f_campo">{{form.curso_id}}</div>
-        <div class="f_campo">{{form.descripción}}</div>
+        <div class="f_campo">
+          {% if form.cupo != form.vacantes %}
+            <a href="{% url 'cons_turno' form.turno_id %}">{{form.descripción}}</a>
+          {% else %}
+            {{form.descripción}}
+         {% endif %}          
+        </div>
         <div class="f_campo">{{form.anio}}</div>
         <div class="f_campo">{{form.destinatario_desc}}</div>
         <div class="f_campo">{{form.experiencia_desc}}</div>
         <div class="f_campo">{{form.cupo}}</div>
-        <div class="f_campo">{{form.vacantes}}</div>
+        <div class="f_campo">
+          {% if form.vacantes > 0 %}
+             <a href="{% url 'alta_inscripcion' form.turno_id %}">{{form.vacantes}}</a>
+          {% else %}
+             {{form.vacantes}}
+          {% endif %}
+        </div>
       
       {% endfor %}
   </section>

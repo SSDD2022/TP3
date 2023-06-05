@@ -32,4 +32,5 @@ def ValEdadGrupo (grupo,fecha_nacimiento):
      return False
 
 def ValEdadAlumno (fecha_nacimiento):
-     return ValEdadGrupo('N', fecha_nacimiento)
+     edad = utils.timezone.now().year - fecha_nacimiento.year
+     return edad >= 8

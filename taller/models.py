@@ -145,6 +145,9 @@ class Turno (models.Model):
     @property
     def vacantes (self):
         return self.cupo - Inscripcion.objects.filter(turno_id = self.turno_id).count()
+    def __str__(self):
+    #    c = Curso.objects.get(curso_id=self.curso_id)
+        return f'{self.curso_id} - {self.descripción} - {self.destinatario_desc} - {self.experiencia_desc}'
 
 
 class Inscripcion (models.Model):
@@ -153,6 +156,7 @@ class Inscripcion (models.Model):
         unique_together = ["alumno_id", "turno_id"]
     alumno_id = models.ForeignKey(Alumno,on_delete=models.CASCADE)
     turno_id = models.ForeignKey(Turno,on_delete=models.CASCADE)
+
 class Trabajo(models.Model):
     imagen = models.FileField(upload_to='galeria/')
     titulo = models.CharField(max_length=100, verbose_name="Título")

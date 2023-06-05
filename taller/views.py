@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import Http404
 from django import utils
 from django.urls import reverse
-from django.views.generic import ListView, UpdateView, CreateView
+from django.views.generic import ListView, UpdateView, CreateView, DetailView
 from django.forms import ModelForm
 from . import classes
 from . import forms
-from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno, Alumno
-from taller.forms import AltaAlumnoForm, AltaTurnoForm
+from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno, Alumno, Inscripcion
+from taller.forms import AltaAlumnoForm, AltaTurnoForm, AltaInscripcionForm
 
 
 # Create your views here.
@@ -208,3 +209,54 @@ class GestionarAlumnos(ListView):
     context_object_name = 'Alumno'
     template_name = 'taller/gestionar_alumnos.html'
     ordering = ["nombre","apellido"]
+
+def alta_inscripcion(request,id=None):
+    context ={}
+
+    if request.method == "POST":
+        form = AltaInscripcionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Inscripcion dada de alta correctamente')
+            #return redirect(reverse("alta_inscripcion"),id)
+            return redirect(reverse("gestionar_turnos"))
+        else:
+            messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
+    else:
+        primer_curso = Curso.objects.filter(titulo__contains='adultos').first()
+        val_inicial = {}
+        val_inicial['turno_id'] = Turno.objects.get(turno_id=int(id))
+        form = AltaInscripcionForm(initial=val_inicial)
+
+    context['form'] = form
+    return render(request, 'taller/alta_inscripcion.html', context)
+
+#class ConsTurno(ListView):
+#    model=Inscripcion
+#    context_object_name = 'Inscripcion'
+#    template_name = 'taller/cons_turno.html'
+#    ordering = ["nombre","apellido"]
+
+
+def cons_turno(request, id):
+    context = {}
+    try:
+        turno = Turno.objects.get(turno_id=id)
+    except Turno.DoesNotExist:
+        raise Http404('Book does not exist')
+    context['turno'] = turno
+
+ #   form = Inscripcion.objects.filter(turno_id=id).select_related()
+    listado = Inscripcion.objects.filter(turno_id=id).values( "id","alumno_id__nombre","alumno_id__apellido","alumno_id__mail").order_by("alumno_id__nombre","alumno_id__apellido")
+    #.query
+    context['listado'] = listado
+    return render(request, 'taller/cons_turno.html', context)
+
+def baja_inscripcion(request, id):
+    ins = Inscripcion.objects.get(id=id)
+    turno = ins.turno_id.turno_id
+    print(turno)
+    ins.delete()
+    url = reverse('cons_turno') + str(turno)
+    print ('url: '+url)
+    return redirect(url) 
