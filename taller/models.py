@@ -87,6 +87,9 @@ class Alumno(models.Model):
                                blank=False,null=False,help_text='Celular de contacto',
                                validators=[ValCelular]
                               ) 
+    
+    def __str__(self):
+        return self.nombre
     # def obtener_verbose_name(self,campo):
     #     return (Alumno._meta.get_field(campo).verbose_name)
     # @property
@@ -160,7 +163,10 @@ class Inscripcion (models.Model):
 class Trabajo(models.Model):
     imagen = models.FileField(upload_to='galeria/')
     titulo = models.CharField(max_length=100, verbose_name="Título")
-    autor = models.CharField(max_length=100, verbose_name="Autor")
+    autor = models.ForeignKey(Alumno,on_delete=models.CASCADE)
     fecha = models.DateField(verbose_name="Fecha", default='1900-01-01')
-    curso = models.CharField(max_length=100, verbose_name="Curso")
+    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE,verbose_name='Curso')
     destacado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"OBRA: {self.titulo} - AUTOR: {self.autor.nombre} {self.autor.apellido} - FECHA: {self.fecha}"

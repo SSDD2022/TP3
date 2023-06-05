@@ -34,6 +34,7 @@ def galeria(request):
     
     return render(request,"taller/galeria.html",context)
 
+@permission_required('taller.cambiar_destacado')
 def cambiar_destacado(request, trabajo_id):
     trabajo = Trabajo.objects.get(id=trabajo_id)
     trabajo.destacado = not trabajo.destacado
@@ -89,6 +90,7 @@ def inscripcion(request, id_curso=None):
     context = {'form': inscripcion_form}
     return render(request,'taller/inscripcion.html' ,context)
 
+@login_required
 def agregar_trabajo(request):
     if request.method == 'POST':
         #POST
@@ -98,7 +100,9 @@ def agregar_trabajo(request):
             nuevo_trabajo = Trabajo(
                 titulo=agregar_trabajo_form.cleaned_data['titulo'], 
                 autor=agregar_trabajo_form.cleaned_data['autor'], 
-                imagen=agregar_trabajo_form.cleaned_data['imagen']
+                imagen=agregar_trabajo_form.cleaned_data['imagen'],
+                fecha=agregar_trabajo_form.cleaned_data['fecha'],
+                curso_id=agregar_trabajo_form.cleaned_data['curso_id']
             ) 
             nuevo_trabajo.save()
             messages.add_message(request, messages.SUCCESS, 'Trabajo agregado a la galería Correctamente', extra_tags="mensaje_exitoso")

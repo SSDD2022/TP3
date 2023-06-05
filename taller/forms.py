@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from django import utils
 from taller.validaciones import ValMail, ValCelular, ValEdadAlumno, ValEdadGrupo
-from taller.models import Alumno, Turno, Curso, Inscripcion
+from taller.models import Alumno, Turno, Curso, Trabajo, Inscripcion
 import re
 
 
@@ -27,12 +27,21 @@ class Inscripcion_form(forms.Form):
                  raise ValidationError ( 'Por favor seleccioná un curso ...')
 
 
-class agregar_trabajo_form(forms.Form):
-    imagen = forms.FileField(label="imagen", required=True)
-    titulo = forms.CharField(label="Título", required=True)
-    autor = forms.CharField(label="Autor", required=True)
-    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+#class agregar_trabajo_form(forms.Form):
+#    imagen = forms.FileField(label="imagen", required=True)
+#    titulo = forms.CharField(label="Título", required=True)
+#    autor = forms.CharField(label="Autor", required=True)
+#    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     #curso = forms.ChoiceField(choices=TYPE_CHOICES,)
+class agregar_trabajo_form(forms.ModelForm):
+    class Meta:
+        model = Trabajo
+        fields = ('imagen', 'titulo', 'autor', 'fecha', 'curso_id')
+        widgets = { "fecha" : forms.DateInput(format='%d-%m-%Y', attrs={'class':'form-control', 'placeholder':'Fecha de nacimiento', 'type':'date'}),
+                  }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['autor'].queryset = Alumno.objects.all()
 
 class Contacto(forms.Form):
     MOTIVOS = (('SUG', 'Sugerencia'),

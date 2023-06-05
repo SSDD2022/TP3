@@ -36,7 +36,8 @@
           <img src="{{ destacado.imagen.url }}" class="d-block w-100 h-100" alt="{{ destacado.titulo }}">
           <div class="carousel-caption d-none d-md-block">
             <h5>{{destacado.titulo}}</h5>
-            <p>Autor: {{destacado.autor}}</p>
+            <p>Autor: {{destacado.autor.nombre}}</p>
+            <p>Curso: {{destacado.curso_id.titulo}}</p>
             <p>Año: {{destacado.fecha}}</p>
           </div>
         </div>
@@ -45,8 +46,8 @@
           <img src="{{ destacado.imagen.url }}" class="d-block w-100 h-100" alt="{{ destacado.titulo }}">
           <div class="carousel-caption d-none d-md-block">
             <h5>{{destacado.titulo}}</h5>
-            <p>Autor: {{destacado.autor}}</p>
-            <p>Curso: {{destacado.curso}}</p>
+            <p>Autor: {{destacado.autor.nombre}}</p>
+            <p>Curso: {{destacado.curso_id.titulo}}</p>
             <p>Fecha: {{destacado.fecha}}</p>
           </div>
         </div>
@@ -81,25 +82,29 @@
             <button type="submit" class="no-destacado">&#9733;</button>
             {% endif %}
           </form>
-          <!-- {% if trabajo.destacado %}
-          <button id="btn-destacar" class="es-destacado">&#9733;</button>
-          {% else %}
-          <button id="btn-destacar" class="no-destacado">&#9733;</button>
-          {% endif %} -->
         </h5>
-        <p class="card-text">Autor: {{trabajo.autor}}</p>
-        <p class="card-text">Curso: {{trabajo.curso}}</p>
+        <p class="card-text alumno" data-nombre="{{trabajo.autor.nombre}}"
+        data-apellido="{{trabajo.autor.apellido}}"
+        data-fecha-nacimiento="{{trabajo.autor.fecha_nacimiento}}">Autor: {{trabajo.autor.nombre}}</p>
+        <p class="card-text">Curso: {{trabajo.curso_id.titulo}}</p>
         <p class="card-text">Fecha: {{trabajo.fecha}}</p>
         <!-- <a href="#" class="btn btn-primary"></a> -->
       </div>
     </div>
     {% endfor %}
   </div>
+
   <div id="div-imagen" class="imagen-trabajo">
     <div class="contenido">
       <img id="imagen-completa" src="{{ trabajo.imagen.url }}" alt="">
     </div>
   </div>
+  <div id="descripcion-autor" class="descripcion-autor">
+    <p>Nombre: {{trabajo.autor.nombre}}</p>
+    <p>Apellido: {{trabajo.autor.apellido}}</p>
+    <p>fecha_nacimiento: {{trabajo.autor.fecha_nacimiento}}</p>
+  </div>
+
   <a href="{% url 'agregar_trabajo' %}"><button id="agregar-trabajo">AGREGAR TRABAJO</button></a>
 </section>
 
