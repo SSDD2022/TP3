@@ -59,12 +59,19 @@ def cursos(request):
     context = { 'cursos': ListadoCursos }
     return render(request,"taller/cursos.html",context)
 
-
-
 def cons_alumno(request, id):
-    context = { 'pagina' : 'Consulta de alumnos',
-              }
-    return render(request,'taller/cons_alumno.html',context)
+    context = {}
+    try:
+        alumno = Alumno.objects.get(alumno_id=id)
+    except Alumno.DoesNotExist:
+        raise Http404('Alumno inexistente')
+    context['alumno'] = alumno
+
+#alumnos, anio, cupo, curso_id, curso_id_id, descripción, destinatario, experiencia, inscripcion, turno_id
+    listado = Inscripcion.objects.filter(alumno_id=id).values( "id","turno_id__curso_id","turno_id__curso_id__titulo","turno_id__descripción").order_by("turno_id__curso_id__titulo","turno_id__descripción")
+    #.query
+    context['listado'] = listado
+    return render(request, 'taller/cons_alumno.html', context)
 
 def cons_cursos(request):
     context = { 'pagina' : 'Consulta de cursos',
@@ -235,19 +242,31 @@ def alta_inscripcion(request,id=None):
     context['form'] = form
     return render(request, 'taller/alta_inscripcion.html', context)
 
-#class ConsTurno(ListView):
-#    model=Inscripcion
-#    context_object_name = 'Inscripcion'
-#    template_name = 'taller/cons_turno.html'
-#    ordering = ["nombre","apellido"]
+def alta_inscripcion2(request,id=None):
+    context ={}
+    if request.method == "POST":
+        form = AltaInscripcionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Inscripcion dada de alta correctamente')
+            return(redirect( reverse('cons_alumno') + str(id)))
+        else:
+            messages.add_message(request, messages.ERROR,"Por favor verifica los datos")
+    else:
+        val_inicial = {}
+        val_inicial['alumno_id'] = Alumno.objects.get(alumno_id=int(id))
+        context['alumno_id'] = Alumno.objects.get(alumno_id=int(id))
+        form = AltaInscripcionForm(initial=val_inicial)
 
+    context['form'] = form
+    return render(request, 'taller/alta_inscripcion2.html', context)
 
 def cons_turno(request, id):
     context = {}
     try:
         turno = Turno.objects.get(turno_id=id)
     except Turno.DoesNotExist:
-        raise Http404('Book does not exist')
+        raise Http404('Turno inexistente')
     context['turno'] = turno
 
  #   form = Inscripcion.objects.filter(turno_id=id).select_related()
@@ -256,11 +275,13 @@ def cons_turno(request, id):
     context['listado'] = listado
     return render(request, 'taller/cons_turno.html', context)
 
-def baja_inscripcion(request, id):
+def baja_inscripcion(request, id, origen):
     ins = Inscripcion.objects.get(id=id)
+    alumno = ins.alumno_id.alumno_id
     turno = ins.turno_id.turno_id
-    print(turno)
     ins.delete()
-    url = reverse('cons_turno') + str(turno)
-    print ('url: '+url)
+    if origen == 'A':
+        url = reverse('cons_alumno') + str(alumno)
+    else: #   if origen == 'T':
+        url = reverse('cons_turno') + str(turno)
     return redirect(url) 

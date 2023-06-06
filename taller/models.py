@@ -20,7 +20,8 @@ class Curso (models.Model):
                               )
     def __str__(self):
         return self.titulo
-
+    class Meta:
+        ordering = ["titulo"]
 
 class CursoDescripcion (models.Model):
     # Primary key generada automaticamente
@@ -90,11 +91,12 @@ class Alumno(models.Model):
     
     def __str__(self):
         return self.nombre
-    # def obtener_verbose_name(self,campo):
-    #     return (Alumno._meta.get_field(campo).verbose_name)
-    # @property
-    # def nombre_label (self):
-    #     return self.obtener_verbose_name('nombre')
+    @property
+    def edad (self):
+        return utils.timezone.now().year - self.fecha_nacimiento.year
+    class Meta:
+        ordering = ["nombre","apellido"]
+
     
 class Turno (models.Model):
     class Experiencia(models.TextChoices):
@@ -149,9 +151,12 @@ class Turno (models.Model):
     def vacantes (self):
         return self.cupo - Inscripcion.objects.filter(turno_id = self.turno_id).count()
     def __str__(self):
-    #    c = Curso.objects.get(curso_id=self.curso_id)
         return f'{self.curso_id} - {self.descripción} - {self.destinatario_desc} - {self.experiencia_desc}'
-
+    @property
+    def desc_larga(self):
+        return f'{self.curso_id} - {self.descripción} - {self.destinatario_desc} - {self.experiencia_desc}'
+    class Meta:
+        ordering = ["curso_id","descripción"]
 
 class Inscripcion (models.Model):
     # Primary key generada automaticamente

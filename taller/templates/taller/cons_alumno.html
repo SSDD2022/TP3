@@ -1,16 +1,34 @@
 {% extends 'taller/base.html' %}
 {% load static %}
 
-{% block extra_css %} 
-    <link rel="stylesheet" href="{% static 'taller/css/alumnos.css' %}">
+{% block title %}Gestión de Turnos{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/cons_alumno.css' %}">
 {% endblock %}
 
-{% block title %}Consulta de alumnos{% endblock %}
-
 {% block header %}
-   <h3 class="titulo_pagina">Alumnos</h3>
-   <h5 class="subtitulo_pagina">Consulta de inscripciones</h5>
+    <h3 class="titulo_pagina">Alumno</h3>
+    <h5 class="subtitulo_pagina"><a href="{% url 'gestionar_alumnos' %}" >Volver</a></h5>
+    <br>
+    <h5 class="subtitulo_pagina">{{alumno.nombre}} {{alumno.apellido}} ({{alumno.edad}} años)
+        <a class="f_icono" href="{% url 'alta_inscripcion2' alumno.alumno_id %}">+</a>
+    </h5>
 {% endblock %} 
 
 {% block content %}
-{% endblock %}
+
+  <section class="form-container">
+
+      <div class="labeles">Baja</div>
+      <div class="labeles">Turno</div>
+
+      {% for form in listado %}
+        <div class="f_icono"><a class="f_icono" href="{% url 'baja_inscripcion' form.id 'A' %}">&#x2212;</a></div>
+        <div class="f_campo">{{form.turno_id__curso_id__titulo}} {{form.turno_id__descripción}}</div>
+     
+      {% endfor %}
+
+  </section>
+
+{% endblock %} 

@@ -112,6 +112,7 @@ class AltaInscripcionForm(forms.ModelForm):
     class Meta:
         model=Inscripcion
         fields = '__all__'
+        ordering = ["alumno_id__desc_larga"]
 
     def clean(self):
         t = self.cleaned_data["turno_id"]
@@ -125,7 +126,7 @@ class AltaInscripcionForm(forms.ModelForm):
             raise forms.ValidationError ('Alumno ya inscripto en este curso')
         return self.cleaned_data
 
-        
+       
 
 
 

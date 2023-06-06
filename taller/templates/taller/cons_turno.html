@@ -24,7 +24,7 @@
       <div class="labeles">Mail</div>
 
       {% for form in listado %}
-        <div class="f_icono"><a class="f_icono" href="{% url 'baja_inscripcion' form.id%}">&#x2212;</a></div>
+        <div class="f_icono"><a class="f_icono" href="{% url 'baja_inscripcion' form.id 'T' %}">&#x2212;</a></div>
         <div class="f_campo">{{form.alumno_id__nombre}}</div>
         <div class="f_campo">{{form.alumno_id__apellido}}</div>
         <div class="f_campo">{{form.alumno_id__mail}}</div>

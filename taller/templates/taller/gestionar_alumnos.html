@@ -16,7 +16,7 @@
 
   <section class="form-container">
 
-      <div class="labeles">Cursos</div>
+      <div class="labeles">Turnos</div>
       <div class="labeles">Nombre</div>
       <div class="labeles">Apellido</div>
       <div class="labeles">Fecha Nac</div>
@@ -25,17 +25,12 @@
 
       {% for form in object_list %}
 
-        <form action="{% url 'cons_alumno' form.alumno_id %}" method="POST"> 
-           {% csrf_token %}
-           <div class="centrado">
-              <button type="submit" class="btn btn-info">+</button>
-           </div>
-        </form>
+        <div class="f_icono"><a class="f_icono" href="{% url 'cons_alumno' form.alumno_id %}">+</a></div>
         <div class="f_nombre">{{form.nombre}}</div>
         <div class="f_apellido">{{form.apellido}}</div>
         <div class="f_fecha">{{form.fecha_nacimiento|date:'d-m-y'}}</div>
         <div class="f_mail">{{form.mail}}</div>
-        <div class="f_comentario">{{form.celular}}</div>
+        <div class="f_celular">{{form.celular}}</div>
       
       {% endfor %}
   </section>
