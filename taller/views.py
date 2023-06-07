@@ -9,8 +9,12 @@ from . import classes
 from . import forms
 from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno, Alumno, Inscripcion
 from taller.forms import AltaAlumnoForm, AltaTurnoForm, AltaInscripcionForm, AltaInscripcionForm2
-from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+# Para validar que el usuario pertenezca a cierto grupo
+def administrativo(user):
+    return user.groups.filter(name='AdmTaller').exists()
 
 # Create your views here.
 def index(request):
@@ -61,6 +65,7 @@ def cursos(request):
     return render(request,"taller/cursos.html",context)
 
 @login_required
+@user_passes_test(administrativo)
 def cons_alumno(request, id):
     context = {}
     try:
@@ -80,6 +85,7 @@ def cons_cursos(request):
     return render(request,'taller/cons_cursos.html',context)
 
 @login_required
+@user_passes_test(administrativo)
 def inscripcion(request, id_curso=None):
     if request.method == 'POST':
         #POST
@@ -100,6 +106,7 @@ def inscripcion(request, id_curso=None):
     return render(request,'taller/inscripcion.html' ,context)
 
 @login_required
+@user_passes_test(administrativo)
 def agregar_trabajo(request):
     if request.method == 'POST':
         #POST
@@ -152,7 +159,7 @@ def contacto(request,motivo=None):
 
     context = {'form': contacto_form}
     return render(request,"taller/contacto.html",context)
-class GestionarContactos(LoginRequiredMixin, ListView):
+class GestionarContactos(LoginRequiredMixin, UserPassesTestMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
     model=Contacto
@@ -160,8 +167,11 @@ class GestionarContactos(LoginRequiredMixin, ListView):
     template_name = 'taller/gestionar_contactos.html'
     fields=["id","revisado","fecha","motivo","nombre","apellido","mail","comentario"]
     ordering = ["revisado","fecha"]
+    def test_func(self):
+        return administrativo(self.request.user)
 
 @login_required
+@user_passes_test(administrativo)
 def cambiar_contacto(request, id):
     cont = Contacto.objects.get(id=int(id))
     cont.revisado = True
@@ -169,6 +179,7 @@ def cambiar_contacto(request, id):
     return redirect(reverse('gestionar_contactos')) 
 
 @login_required
+@user_passes_test(administrativo)
 def alta_alumno(request):
     context ={}
 
@@ -187,6 +198,7 @@ def alta_alumno(request):
     return render(request, 'taller/alta_alumnos.html', context)
 
 @login_required
+@user_passes_test(administrativo)
 def alta_turno(request):
     context ={}
 
@@ -214,7 +226,7 @@ def alta_turno(request):
     context['form'] = form
     return render(request, 'taller/alta_turno.html', context)
 
-class GestionarTurnos(LoginRequiredMixin, ListView):
+class GestionarTurnos(LoginRequiredMixin, UserPassesTestMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
     model=Turno
@@ -222,16 +234,20 @@ class GestionarTurnos(LoginRequiredMixin, ListView):
     template_name = 'taller/gestionar_turnos.html'
     exclude=["id","alumnos"]
     ordering = ["-anio","curso_id","destinatario","experiencia","-cupo"]
-
-class GestionarAlumnos(LoginRequiredMixin, ListView):
+    def test_func(self):
+        return administrativo(self.request.user)
+class GestionarAlumnos(LoginRequiredMixin, UserPassesTestMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
     model=Alumno
     context_object_name = 'Alumno'
     template_name = 'taller/gestionar_alumnos.html'
     ordering = ["nombre","apellido"]
-
+    def test_func(self):
+        return administrativo(self.request.user)
+    
 @login_required
+@user_passes_test(administrativo)
 def alta_inscripcion(request,id=None):
     context ={}
 
@@ -254,6 +270,7 @@ def alta_inscripcion(request,id=None):
     return render(request, 'taller/alta_inscripcion.html', context)
 
 @login_required
+@user_passes_test(administrativo)
 def alta_inscripcion2(request,id=None):
     context ={}
     if request.method == "POST":
@@ -274,6 +291,7 @@ def alta_inscripcion2(request,id=None):
     return render(request, 'taller/alta_inscripcion2.html', context)
 
 @login_required
+@user_passes_test(administrativo)
 def cons_turno(request, id):
     context = {}
     try:
@@ -289,6 +307,7 @@ def cons_turno(request, id):
     return render(request, 'taller/cons_turno.html', context)
 
 @login_required
+@user_passes_test(administrativo)
 def baja_inscripcion(request, id, origen):
     ins = Inscripcion.objects.get(id=id)
     alumno = ins.alumno_id.alumno_id
