@@ -107,8 +107,7 @@ class AltaTurnoForm(forms.ModelForm):
             raise forms.ValidationError ('Año actual o futuro') 
         return self.cleaned_data.get('anio')  
 
-  
-class AltaInscripcionForm(forms.ModelForm):
+class AltaInscripcionForm2(forms.ModelForm):
     class Meta:
         model=Inscripcion
         fields = '__all__'
@@ -126,8 +125,28 @@ class AltaInscripcionForm(forms.ModelForm):
             raise forms.ValidationError ('Alumno ya inscripto en este curso')
         return self.cleaned_data
 
-       
+class AltaInscripcionForm(AltaInscripcionForm2):
+#    alumno_id = forms.ModelMultipleChoiceField( queryset=Alumno.objects.all())
+    class Meta:
+        model=Inscripcion
+        fields = '__all__'
+        ordering = ["alumno_id__desc_larga"]
 
-
-
+    def clean(self):
+        t = self.cleaned_data["turno_id"]
+        if t.vacantes <= 0:
+            raise forms.ValidationError ('Turno sin vacantes')
+        a = self.cleaned_data["alumno_id"]
+        # for cada_uno in a:
+            # if not ValEdadGrupo (t.destinatario,cada_uno.fecha_nacimiento):
+            #     raise forms.ValidationError ('La edad del alumno no aplica a este curso')
+            # i = Inscripcion.objects.filter(turno_id=t.turno_id,alumno_id = cada_uno.alumno_id).count()
+            # if i > 0:
+            #     raise forms.ValidationError ('Alumno ya inscripto en este curso')
+        if not ValEdadGrupo (t.destinatario,a.fecha_nacimiento):
+            raise forms.ValidationError ('La edad del alumno no aplica a este curso')
+        i = Inscripcion.objects.filter(turno_id=t.turno_id,alumno_id = a.alumno_id).count()
+        if i > 0:
+            raise forms.ValidationError ('Alumno ya inscripto en este curso')
+        return self.cleaned_data
          

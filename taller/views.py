@@ -8,8 +8,9 @@ from django.forms import ModelForm
 from . import classes
 from . import forms
 from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno, Alumno, Inscripcion
-from taller.forms import AltaAlumnoForm, AltaTurnoForm, AltaInscripcionForm
+from taller.forms import AltaAlumnoForm, AltaTurnoForm, AltaInscripcionForm, AltaInscripcionForm2
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def index(request):
@@ -59,6 +60,7 @@ def cursos(request):
     context = { 'cursos': ListadoCursos }
     return render(request,"taller/cursos.html",context)
 
+@login_required
 def cons_alumno(request, id):
     context = {}
     try:
@@ -67,7 +69,6 @@ def cons_alumno(request, id):
         raise Http404('Alumno inexistente')
     context['alumno'] = alumno
 
-#alumnos, anio, cupo, curso_id, curso_id_id, descripción, destinatario, experiencia, inscripcion, turno_id
     listado = Inscripcion.objects.filter(alumno_id=id).values( "id","turno_id__curso_id","turno_id__curso_id__titulo","turno_id__descripción").order_by("turno_id__curso_id__titulo","turno_id__descripción")
     #.query
     context['listado'] = listado
@@ -78,6 +79,7 @@ def cons_cursos(request):
               }
     return render(request,'taller/cons_cursos.html',context)
 
+@login_required
 def inscripcion(request, id_curso=None):
     if request.method == 'POST':
         #POST
@@ -150,20 +152,23 @@ def contacto(request,motivo=None):
 
     context = {'form': contacto_form}
     return render(request,"taller/contacto.html",context)
-
-class GestionarContactos(ListView):
+class GestionarContactos(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
     model=Contacto
     context_object_name = 'Contacto'
     template_name = 'taller/gestionar_contactos.html'
     fields=["id","revisado","fecha","motivo","nombre","apellido","mail","comentario"]
     ordering = ["revisado","fecha"]
 
+@login_required
 def cambiar_contacto(request, id):
     cont = Contacto.objects.get(id=int(id))
     cont.revisado = True
     cont.save()
     return redirect(reverse('gestionar_contactos')) 
 
+@login_required
 def alta_alumno(request):
     context ={}
 
@@ -181,6 +186,7 @@ def alta_alumno(request):
     context['form'] = form
     return render(request, 'taller/alta_alumnos.html', context)
 
+@login_required
 def alta_turno(request):
     context ={}
 
@@ -208,19 +214,24 @@ def alta_turno(request):
     context['form'] = form
     return render(request, 'taller/alta_turno.html', context)
 
-class GestionarTurnos(ListView):
+class GestionarTurnos(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
     model=Turno
     context_object_name = 'Turno'
     template_name = 'taller/gestionar_turnos.html'
     exclude=["id","alumnos"]
     ordering = ["-anio","curso_id","destinatario","experiencia","-cupo"]
 
-class GestionarAlumnos(ListView):
+class GestionarAlumnos(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
     model=Alumno
     context_object_name = 'Alumno'
     template_name = 'taller/gestionar_alumnos.html'
     ordering = ["nombre","apellido"]
 
+@login_required
 def alta_inscripcion(request,id=None):
     context ={}
 
@@ -242,10 +253,11 @@ def alta_inscripcion(request,id=None):
     context['form'] = form
     return render(request, 'taller/alta_inscripcion.html', context)
 
+@login_required
 def alta_inscripcion2(request,id=None):
     context ={}
     if request.method == "POST":
-        form = AltaInscripcionForm(request.POST)
+        form = AltaInscripcionForm2(request.POST)
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Inscripcion dada de alta correctamente')
@@ -256,11 +268,12 @@ def alta_inscripcion2(request,id=None):
         val_inicial = {}
         val_inicial['alumno_id'] = Alumno.objects.get(alumno_id=int(id))
         context['alumno_id'] = Alumno.objects.get(alumno_id=int(id))
-        form = AltaInscripcionForm(initial=val_inicial)
+        form = AltaInscripcionForm2(initial=val_inicial)
 
     context['form'] = form
     return render(request, 'taller/alta_inscripcion2.html', context)
 
+@login_required
 def cons_turno(request, id):
     context = {}
     try:
@@ -275,6 +288,7 @@ def cons_turno(request, id):
     context['listado'] = listado
     return render(request, 'taller/cons_turno.html', context)
 
+@login_required
 def baja_inscripcion(request, id, origen):
     ins = Inscripcion.objects.get(id=id)
     alumno = ins.alumno_id.alumno_id

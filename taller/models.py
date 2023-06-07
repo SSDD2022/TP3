@@ -89,11 +89,12 @@ class Alumno(models.Model):
                                validators=[ValCelular]
                               ) 
     
-    def __str__(self):
-        return self.nombre
     @property
     def edad (self):
         return utils.timezone.now().year - self.fecha_nacimiento.year
+    def __str__(self):
+#        return self.nombre
+        return f'{self.nombre} {self.apellido} ({self.edad})'
     class Meta:
         ordering = ["nombre","apellido"]
 

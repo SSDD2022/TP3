@@ -11,3 +11,15 @@ admin.site.register(Inscripcion)
 class TrabajoAdmin(admin.ModelAdmin):
     list_display = ['titulo', 'autor', 'fecha', 'curso_id', 'destacado']
 admin.site.register(Trabajo, TrabajoAdmin)
+
+class InscripcionInline(admin.TabularInline):
+    model = Turno.alumnos.through
+class AlumnoAdmin(admin.ModelAdmin):
+    inlines = [
+        InscripcionInline,
+    ]
+class TurnoAdmin(admin.ModelAdmin):
+    inlines = [
+        InscripcionInline,
+    ]
+    exclude = ('alumnos',)
