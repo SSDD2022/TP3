@@ -54,12 +54,11 @@ def cursos(request):
         v = classes.Visual("flush-heading"+str(c.curso_id),"#flush-collapse"+str(c.curso_id),
                            "flush-collapse"+str(c.curso_id))
         x = classes.CursoOld(c.curso_id, c.titulo,[],
-                             'taller/img/' + c.imagen,True,v)
+                             'taller/img/' + c.imagen,c.disponible,v)
         descripcioncilla = CursoDescripcion.objects.filter(curso_id=c.curso_id).order_by('posicion_id')
         for desc in descripcioncilla.all():
             x.descripcion.append(desc.descripcion)
         ListadoCursos.append(x)
-    ListadoCursos[4].cupo = False
 
     context = { 'cursos': ListadoCursos }
     return render(request,"taller/cursos.html",context)

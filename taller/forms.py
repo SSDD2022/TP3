@@ -46,7 +46,8 @@ class agregar_trabajo_form(forms.ModelForm):
 class Contacto(forms.Form):
     MOTIVOS = (('SUG', 'Sugerencia'),
                ('CON', 'Consulta'),
-               ('SUS', 'Suscripción')
+               ('SUS', 'Suscripción'),
+               ('INS', 'Inscripción')
               )    
     motivo = forms.ChoiceField(choices = MOTIVOS, required=True) 
     nombre = forms.CharField(max_length=30,label="Nombre", required=True)
