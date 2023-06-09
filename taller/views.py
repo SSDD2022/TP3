@@ -16,6 +16,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 def administrativo(user):
     return user.groups.filter(name='AdmTaller').exists()
 
+def alumno(user):
+    return user.groups.filter(name='Alumno').exists()
+
 # Create your views here.
 def index(request):
     context = { 'pagina' : 'taller/index.html',
@@ -106,7 +109,7 @@ def inscripcion(request, id_curso=None):
     return render(request,'taller/inscripcion.html' ,context)
 
 @login_required
-@user_passes_test(administrativo)
+@user_passes_test(alumno)
 def agregar_trabajo(request):
     if request.method == 'POST':
         #POST
