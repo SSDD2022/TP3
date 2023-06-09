@@ -1,25 +1,54 @@
 .form-container {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 8% 21% 21% 10% 25% 14%;
     grid-template-rows: auto;
     grid-auto-flow: row;
-    grid-row-gap: 0.5rem;
-    grid-column-gap: 0.3rem;
-    width: 95%;
+    grid-row-gap: 0.2rem;
+    grid-column-gap: 0.2rem;
+    width: 98%;
     margin-top: 1.5rem;
     margin-right: 0.5rem;
-    margin-left: 2%;
+    margin-left: 0.5rem;
     margin-bottom: 1.5em;
     border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    padding: 1%;
-    background-color: #bfc7f3; /* rgb(193, 214, 241);  /* bisque; */
-  }
-
+    padding: 0.5rem;
+ /*   background-color: #bfc7f3; /* rgb(193, 214, 241);  /* bisque; */
+}
+.f_revisado, .f_fecha, .f_motivo, .f_nombre, .f_apellido, .f_mail, .f_celular {
+    /* grid-area: revisado-area; */
+    width: 100%;
+    background-color: #bfc7f3; 
+    word-wrap: break-word;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+}
+.f_icono {
+    /* grid-area: revisado-area; */
+    width: 100%;
+    /* font-size: larger; */
+    text-align: center;
+    /* font-weight: bolder; */
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
 .form-container .labeles {
     font-weight: bold;
     color: #5c5b5b;
+    width: 100%;
+    text-align: center;
+    background-color: #bfc7f3; 
+    word-wrap: break-word;
+    border: solid 2px;
+    border-color: #a4ade0;
+    border-radius: 4px;
+}
+.form-container .form-error {
+    font-weight: normal;
+    color: red;
 }
 .form-containter .botones {
     color: white; 
@@ -33,6 +62,7 @@ input, textarea, select {
     border-radius: 4px;
     box-sizing: border-box;
     padding-left: 0.8rem;
+    width: 100%;
 }
 input:focus, textarea:focus, select:focus,
 input:hover, textarea:hover, select:hover  {
@@ -60,4 +90,13 @@ input[type=submit]:hover {
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+.destacado {
+    font-weight: bold;
+    color: blue;
+    list-style: none;
+}
+.centrado {
+    text-align: center;
 }

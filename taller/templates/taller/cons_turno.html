@@ -1,0 +1,39 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block title %}Gestión de Turnos{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/cons_turno.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h3 class="titulo_pagina">Inscriptos</h3>
+    <h5 class="subtitulo_pagina"><a href="{% url 'gestionar_turnos' %}" >Volver</a></h5>
+    <br>
+    <h5 class="subtitulo_pagina">{{turno}}</h5>
+{% endblock %} 
+
+{% block content %}
+
+  <section class="form-container">
+
+      <div class="labeles">Baja</div>
+      <div class="labeles">Nombre</div>
+      <div class="labeles">Apellido</div>
+      <div class="labeles">Mail</div>
+
+      {% for form in listado %}
+        <div class="f_icono"><a class="f_icono" href="{% url 'baja_inscripcion' form.id 'T' %}">&#x2212;</a></div>
+        <div class="f_campo">{{form.alumno_id__nombre}}</div>
+        <div class="f_campo">{{form.alumno_id__apellido}}</div>
+        <div class="f_campo">{{form.alumno_id__mail}}</div>
+      
+      {% endfor %}
+      {% comment %}
+      {{ form }}
+      {% endcomment %}
+
+  </section>
+
+{% endblock %} 

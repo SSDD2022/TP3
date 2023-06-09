@@ -1,0 +1,42 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block extra_css %} 
+    <link rel="stylesheet" href="{% static 'taller/css/form.css' %}">
+{% endblock %}
+
+{% block title %}Gestión de alumnos{% endblock %}
+
+{% block header %}
+   <h3 class="titulo_pagina">Nuevo Alumno</h3>
+   <h5 class="subtitulo_pagina"><a href="{% url 'gestionar_alumnos' %}" >Volver</a></h5>
+{% endblock %} 
+
+{% block content %}
+<form action="" method="POST">
+    <section class="form-container">
+        {% csrf_token %}
+        <div class="labeles">{{form.nombre.label}}:</div>
+        <div>{{form.nombre}}</div>
+        <div class="form-error">{{form.nombre.errors}}</div>
+ 
+        <div class="labeles">{{form.apellido.label}}</div>
+        <div>{{form.apellido}}</div>
+        <div class="form-error">{{form.apellido.errors}}</div>
+  
+        <div class="labeles">{{form.fecha_nacimiento.label}}:</div>
+        <div>{{form.fecha_nacimiento}}</div>
+        <div class="form-error">{{form.fecha_nacimiento.errors}}</div>
+  
+        <div class="labeles">{{form.mail.label}}:</div>
+        <div>{{form.mail}}</div>
+        <div class="form-error">{{form.mail.errors}}</div>
+  
+        <div class="labeles">{{form.celular.label}}:</div>
+        <div>{{form.celular}}</div>
+        <div class="form-error">{{form.celular.errors}}</div>
+
+      <input type="submit" name="f_enviar"   id="f_enviar"   value="Enviar" class="botones">
+    </section>
+  </form>
+{% endblock %}

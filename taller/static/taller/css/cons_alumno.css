@@ -1,0 +1,99 @@
+.form-container {
+    display: grid;
+    grid-template-columns: 8% 90%;
+    grid-template-rows: auto;
+    grid-auto-flow: row;
+    grid-row-gap: 0.2rem;
+    grid-column-gap: 0.2rem;
+    width: 98%;
+    margin-top: 1.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1.5em;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0.5rem;
+ /*   background-color: #bfc7f3; /* rgb(193, 214, 241);  /* bisque; */
+}
+.f_campo {
+    /* grid-area: revisado-area; */
+    width: 100%;
+    background-color: #bfc7f3; 
+    word-wrap: break-word;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+}
+.f_icono {
+    /* grid-area: revisado-area; */
+    width: 100%;
+    /* font-size: larger; */
+    text-align: center;
+    /* font-weight: bolder; */
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+.form-container .labeles {
+    font-weight: bold;
+    color: #5c5b5b;
+    width: 100%;
+    text-align: center;
+    background-color: #bfc7f3; 
+    word-wrap: break-word;
+    border: solid 2px;
+    border-color: #a4ade0;
+    border-radius: 4px;
+}
+.form-container .form-error {
+    font-weight: normal;
+    color: red;
+}
+.form-containter .botones {
+    color: white; 
+    font-size: medium; 
+    font-weight: bold;
+    margin: 0 1.8rem 0 0;
+    text-align: center;
+}
+input, textarea, select {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding-left: 0.8rem;
+    width: 100%;
+}
+input:focus, textarea:focus, select:focus,
+input:hover, textarea:hover, select:hover  {
+    outline: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+select:hover {
+    cursor: pointer;
+}
+textarea {
+    resize: none;
+}
+select {
+    font-weight: bold;
+    color: #5c5b5b; /* rgb(221, 126, 10); */
+}
+input[type=submit] {
+    background-color: #605e5f;
+    color: bisque;
+    font-weight: bold;
+    padding-left: 0;
+}
+input[type=submit]:hover {
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.destacado {
+    font-weight: bold;
+    color: blue;
+    list-style: none;
+}

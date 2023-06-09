@@ -1,0 +1,48 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block extra_css %} 
+    <link rel="stylesheet" href="{% static 'taller/css/form.css' %}">
+{% endblock %}
+
+{% block title %}Gestión de Turnos{% endblock %}
+
+{% block header %}
+   <h3 class="titulo_pagina">Nuevo Turno</h3>
+   <h5 class="subtitulo_pagina"><a href="{% url 'gestionar_turnos' %}" >Volver</a></h5>
+{% endblock %} 
+
+{% block content %}
+<form action="" method="POST">
+    <section class="form-container">
+        {% csrf_token %}
+
+        <div class="labeles">Curso:</div>
+        <div>{{form.curso_id}}</div>
+        <div class="form-error">{{form.curso.errors}}</div>
+
+        <div class="labeles">{{form.descripción.label}}:</div>
+        <div>{{form.descripción}}</div>
+        <div class="form-error">{{form.descripción.errors}}</div>
+  
+        <div class="labeles">{{form.anio.label}}:</div>
+        <div>{{form.anio}}</div>
+        <div class="form-error">{{form.anio.errors}}</div>
+  
+        <div class="labeles">{{form.destinatario.label}}:</div>
+        <div>{{form.destinatario}}</div>
+        <div class="form-error">{{form.destinatario.errors}}</div>
+  
+        <div class="labeles">{{form.experiencia.label}}:</div>
+        <div>{{form.experiencia}}</div>
+        <div class="form-error">{{form.experiencia.errors}}</div>
+
+        <div class="labeles">{{form.cupo.label}}:</div>
+        <div>{{form.cupo}}</div>
+        <div class="form-error">{{form.cupo.errors}}</div>
+
+
+      <input type="submit" name="f_enviar"   id="f_enviar"   value="Enviar" class="botones">
+    </section>
+  </form>
+{% endblock %}

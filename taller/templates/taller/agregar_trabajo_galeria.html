@@ -3,7 +3,9 @@
 
 {% block title %}Agregar Trabajo{% endblock %}
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'taller/css/galeria.css' %}">{% endblock %}
+<link rel="stylesheet" href="{% static 'taller/css/galeria.css' %}">
+<link rel="stylesheet" href="{% static 'taller/css/form.css' %}">
+{% endblock %}
 
 <body>
   {% block header %}
@@ -13,11 +15,37 @@
 
   {% block content %}
   <form action="" method="POST" enctype="multipart/form-data">
+    <section class="form-container">
+        {% csrf_token %}
+        <div class="labeles">{{form.imagen.label}}:</div>
+        <div>{{form.imagen}}</div>
+        <div class="form-error">{{form.imagen.errors}}</div>
+
+        <div class="labeles">{{form.titulo.label}}:</div>
+        <div>{{form.titulo}}</div>
+        <div class="form-error">{{form.titulo.errors}}</div>
+ 
+        <div class="labeles">{{form.autor.label}}</div>
+        <div>{{form.autor}}</div>
+        <div class="form-error">{{form.autor.errors}}</div>
+  
+        <div class="labeles">{{form.fecha.label}}:</div>
+        <div>{{form.fecha}}</div>
+        <div class="form-error">{{form.fecha.errors}}</div>
+  
+        <div class="labeles">{{form.curso_id.label}}:</div>
+        <div>{{form.curso_id}}</div>
+        <div class="form-error">{{form.curso.errors}}</div>
+
+      <input type="submit" name="f_enviar"   id="f_enviar"   value="Enviar" class="botones">
+    </section>
+  </form>
+  <!-- <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
  
     <input type="submit">
  
- </form>
+ </form> -->
   {% endblock %}
 </body>

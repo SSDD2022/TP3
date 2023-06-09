@@ -1,0 +1,37 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block extra_css %} 
+    <link rel="stylesheet" href="{% static 'taller/css/form.css' %}">
+{% endblock %}
+
+{% block title %}Inscripción{% endblock %}
+
+{% block header %}
+   <h3 class="titulo_pagina">Nueva inscripcion</h3>
+   <h5 class="subtitulo_pagina"><a href="{% url 'cons_alumno' alumno_id.alumno_id %} " >Volver</a></h5>
+{% endblock %} 
+
+{% block content %}
+
+<form action="" method="POST">
+    <section class="form-container">
+        {% csrf_token %}
+
+  
+        <div class="labeles">Alumno:</div>
+        <div>{{form.alumno_id}}</div>
+        <div class="form-error">{{form.alumno_id.errors}}</div>
+        
+        <div class="labeles">Turno:</div>
+        <div>{{form.turno_id}}</div>
+        <div class="form-error">{{form.turno_id.errors}}</div>
+  
+      <input type="submit" name="f_enviar"   id="f_enviar"   value="Enviar" class="botones">
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div class="form-error">{{ form.non_field_errors }}</div>
+    </section>
+  </form>
+  
+{% endblock %}

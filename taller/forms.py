@@ -1,6 +1,13 @@
 from django import forms
+from django.contrib import messages
 from django.core.exceptions import ValidationError
+from django.conf import settings
+from django import utils
+from taller.validaciones import ValMail, ValCelular, ValEdadAlumno, ValEdadGrupo
+from taller.models import Alumno, Turno, Curso, Trabajo, Inscripcion
 import re
+
+
 class Inscripcion_form(forms.Form):
         CURSOS = ((1, 'Cerámica para niños'),
                   (2, 'Cerámica para adultos'),
@@ -20,17 +27,27 @@ class Inscripcion_form(forms.Form):
                  raise ValidationError ( 'Por favor seleccioná un curso ...')
 
 
-class agregar_trabajo_form(forms.Form):
-    imagen = forms.FileField(label="imagen", required=True)
-    titulo = forms.CharField(label="Título", required=True)
-    autor = forms.CharField(label="Autor", required=True)
-    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+#class agregar_trabajo_form(forms.Form):
+#    imagen = forms.FileField(label="imagen", required=True)
+#    titulo = forms.CharField(label="Título", required=True)
+#    autor = forms.CharField(label="Autor", required=True)
+#    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     #curso = forms.ChoiceField(choices=TYPE_CHOICES,)
+class agregar_trabajo_form(forms.ModelForm):
+    class Meta:
+        model = Trabajo
+        fields = ('imagen', 'titulo', 'autor', 'fecha', 'curso_id')
+        widgets = { "fecha" : forms.DateInput(format='%d-%m-%Y', attrs={'class':'form-control', 'placeholder':'Fecha de nacimiento', 'type':'date'}),
+                  }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['autor'].queryset = Alumno.objects.all()
 
 class Contacto(forms.Form):
     MOTIVOS = (('SUG', 'Sugerencia'),
                ('CON', 'Consulta'),
-               ('SUS', 'Suscripción')
+               ('SUS', 'Suscripción'),
+               ('INS', 'Inscripción')
               )    
     motivo = forms.ChoiceField(choices = MOTIVOS, required=True) 
     nombre = forms.CharField(max_length=30,label="Nombre", required=True)
@@ -38,15 +55,99 @@ class Contacto(forms.Form):
     mail = forms.EmailField(max_length=30,label="Email", required=True)
     comentario = forms.CharField(max_length=500,widget=forms.Textarea(attrs={"rows":"5"}),required=False)
     def clean_mail (self):
-        EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
-        mail = self.cleaned_data.get('mail')
-        if mail and not re.match(EMAIL_REGEX, mail):
-            raise ValidationError ('Mail inválido')
+        mail = self.cleaned_data["mail"]
+        if mail and not ValMail(mail):
+            error_dict = { 'mail': 'Mail inválido' }
+            raise forms.ValidationError (error_dict)
         return self.cleaned_data.get('mail')
     def clean (self):
         motivo = self.cleaned_data["motivo"]
         comentario = self.cleaned_data["comentario"]
         if motivo != 'SUS' and len(comentario) == 0:
-           self.fields['comentario'].widget.attrs['placeholder'] = 'Por favor completa el comentario ...'
-           raise ValidationError ( 'Por favor completa el comentario ...')
+#          self.fields['comentario'].widget.attrs['placeholder'] = 'Por favor completa el comentario ...'
+            error_dict = { 'comentario': 'Ingresa el comentario' }
+            raise forms.ValidationError (error_dict)
+        return self.cleaned_data
 
+class AltaAlumnoForm(forms.ModelForm):
+    class Meta:
+        model=Alumno
+        fields=["nombre","apellido","fecha_nacimiento","mail","celular"]
+        widgets = { "fecha_nacimiento" : forms.DateInput(format='%d-%m-%Y', attrs={'class':'form-control', 'placeholder':'Fecha de nacimiento', 'type':'date'}),
+                  }
+    def clean_mail (self):
+        mail = self.cleaned_data["mail"]
+        if not mail or not ValMail(mail):
+            raise forms.ValidationError ('Mail inválido')
+        return self.cleaned_data.get('mail')  
+    def clean_celular (self):
+        celular = self.cleaned_data["celular"]
+        if not celular or not ValCelular(celular):
+            raise forms.ValidationError ('Formato: (11) 11111111')
+        return self.cleaned_data.get('celular')
+    def clean_fecha_nacimiento(self):
+        fecha = self.cleaned_data["fecha_nacimiento"]
+        if not fecha or not ValEdadAlumno (fecha):
+            raise forms.ValidationError ('Aún no tiene 8 años')
+        return self.cleaned_data.get('fecha_nacimiento')        
+
+class AltaTurnoForm(forms.ModelForm):
+    class Meta:
+        model=Turno
+        exclude=["turno_id","alumnos"]
+        fields = ["curso_id", "descripción", "anio", "destinatario", "experiencia", "cupo"]
+
+    def clean_cupo(self):
+        cupo = self.cleaned_data["cupo"]
+        if not cupo or cupo <= 0:
+            raise forms.ValidationError ('El cupo es positivo')
+        return self.cleaned_data.get('cupo')
+    def clean_anio(self):
+        anio = self.cleaned_data["anio"]
+        if not anio or anio < utils.timezone.now().year:
+            raise forms.ValidationError ('Año actual o futuro') 
+        return self.cleaned_data.get('anio')  
+
+class AltaInscripcionForm2(forms.ModelForm):
+    class Meta:
+        model=Inscripcion
+        fields = '__all__'
+        ordering = ["alumno_id__desc_larga"]
+
+    def clean(self):
+        t = self.cleaned_data["turno_id"]
+        a = self.cleaned_data["alumno_id"]
+        if t.vacantes <= 0:
+            raise forms.ValidationError ('Turno sin vacantes')
+        if not ValEdadGrupo (t.destinatario,a.fecha_nacimiento):
+            raise forms.ValidationError ('La edad del alumno no aplica a este curso')
+        i = Inscripcion.objects.filter(turno_id=t.turno_id,alumno_id = a.alumno_id).count()
+        if i > 0:
+            raise forms.ValidationError ('Alumno ya inscripto en este curso')
+        return self.cleaned_data
+
+class AltaInscripcionForm(AltaInscripcionForm2):
+#    alumno_id = forms.ModelMultipleChoiceField( queryset=Alumno.objects.all())
+    class Meta:
+        model=Inscripcion
+        fields = '__all__'
+        ordering = ["alumno_id__desc_larga"]
+
+    def clean(self):
+        t = self.cleaned_data["turno_id"]
+        if t.vacantes <= 0:
+            raise forms.ValidationError ('Turno sin vacantes')
+        a = self.cleaned_data["alumno_id"]
+        # for cada_uno in a:
+            # if not ValEdadGrupo (t.destinatario,cada_uno.fecha_nacimiento):
+            #     raise forms.ValidationError ('La edad del alumno no aplica a este curso')
+            # i = Inscripcion.objects.filter(turno_id=t.turno_id,alumno_id = cada_uno.alumno_id).count()
+            # if i > 0:
+            #     raise forms.ValidationError ('Alumno ya inscripto en este curso')
+        if not ValEdadGrupo (t.destinatario,a.fecha_nacimiento):
+            raise forms.ValidationError ('La edad del alumno no aplica a este curso')
+        i = Inscripcion.objects.filter(turno_id=t.turno_id,alumno_id = a.alumno_id).count()
+        if i > 0:
+            raise forms.ValidationError ('Alumno ya inscripto en este curso')
+        return self.cleaned_data
+         

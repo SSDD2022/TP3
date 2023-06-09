@@ -1,0 +1,54 @@
+{% extends 'taller/base.html' %}
+{% load static %}
+
+{% block title %}Gestión de Contactos{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'taller/css/gestionar_contactos.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h3 class="titulo_pagina">Contactos</h3>
+    <h5 class="subtitulo_pagina">Revisión</h5>
+{% endblock %} 
+
+{% block content %}
+
+  <section class="form-container">
+
+      <div class="labeles">Pend</div>
+      <div class="labeles">Fecha</div>
+      <div class="labeles">Motivo</div>
+      <div class="labeles">Nombre</div>
+      <div class="labeles">Apellido</div>
+      <div class="labeles">Mail</div>
+      <div class="labeles">Comentario</div>   
+
+      {% for form in object_list %}
+      {% comment %}
+        <form action="{% url 'cambiar_contacto' form.id %}" method="POST"> 
+           {% csrf_token %}
+           <div>
+              {% if not form.revisado %}
+                <button type="submit" class="f_icono">Sí</button>
+              {% endif %}
+           </div>
+        </form>
+        {% endcomment %}
+
+        <div class="f_icono">
+          {% if not form.revisado %}
+             <a class="f_icono" href="{% url 'cambiar_contacto' form.id%}">Sí</a>
+          {% endif %}
+        </div>
+        <div class="f_fecha">{{form.fecha|date:'d-m-y'}}</div>
+        <div class="f_motivo">{{form.motivo_desc}}</div>
+        <div class="f_nombre">{{form.nombre}}</div>
+        <div class="f_apellido">{{form.apellido}}</div>
+        <div class="f_mail">{{form.mail}}</div>
+        <div class="f_comentario">{{form.comentario}}</div>
+      
+      {% endfor %}
+  </section>
+
+{% endblock %} 
