@@ -30,9 +30,9 @@
 }
 
 .texto {
-    background-color: bisque;
+    background-color: #ffe4c4;
     padding: 1rem;
-    border: 2px solid rgb(87, 61, 31);
+    border: 2px solid rgb(95, 69, 39);
     /* border-style: outset; */
     border-bottom-width: 3px;
     border-right-width: 3px;

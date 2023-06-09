@@ -13,7 +13,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'galeria' %}">Galería</a>
       </li>
-      {% if user.is_authenticated and perms.taller %}
+      {% if user.is_authenticated and perms.taller.delete_curso %}
       <li class="nav-item li-padre">
         <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">Gestión<span class="caret"></span></a>
         <ul class="dropdown-menu sub-menu" aria-labelledby="dropdownMenuButton" >

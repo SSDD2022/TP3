@@ -42,6 +42,10 @@ class CursoDescripcion (models.Model):
                                    blank=False,null=False,help_text='Descripción',
                                    #validators=NotImplemented
                                    )
+    def __str__(self):
+        return f'{self.curso_id.titulo} # {self.posicion_id}'
+    class Meta:
+        ordering = ["curso_id","posicion_id"]
 
 MOT_Contacto = (('SUG', 'Sugerencia'),
                 ('CON', 'Consulta'),
@@ -172,6 +176,11 @@ class Inscripcion (models.Model):
         unique_together = ["alumno_id", "turno_id"]
     alumno_id = models.ForeignKey(Alumno,on_delete=models.CASCADE)
     turno_id = models.ForeignKey(Turno,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.turno_id} / {self.alumno_id}'
+    class Meta:
+        ordering = ["turno_id","alumno_id"]
 
 class Trabajo(models.Model):
     imagen = models.FileField(upload_to='galeria/')
