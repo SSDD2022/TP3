@@ -42,7 +42,8 @@ def galeria(request):
     
     return render(request,"taller/galeria.html",context)
 
-@permission_required('taller.cambiar_destacado')
+@login_required
+@user_passes_test(administrativo)
 def cambiar_destacado(request, trabajo_id):
     trabajo = Trabajo.objects.get(id=trabajo_id)
     trabajo.destacado = not trabajo.destacado
