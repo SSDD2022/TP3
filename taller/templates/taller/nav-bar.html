@@ -20,11 +20,12 @@
           <li><a class="nav-item nav-link" href="{% url 'gestionar_alumnos' %}">Alumnos</a></li>
           <li><a class="nav-item nav-link" href="{% url 'gestionar_contactos' %}">Contactos</a></li>
           <li><a class="nav-item nav-link" href="{% url 'gestionar_turnos' %}">Turnos</a></li>
+          <li><a class="nav-item nav-link" href="/accounts/logout/">Logout</a></li>
         </ul>
       </li>
       {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="/accounts/login/">Login</a>
       </li>
       {% endif %}
     </ul>

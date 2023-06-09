@@ -45,9 +45,9 @@
                   <!-- <a class="destacado con_vacantes" href="{% url 'inscripcion' curso.id %}" >Vacantes disponibles - Inscribite !</a> --> -->
                   <!-- <a class="destacado con_vacantes" href="{% url 'inscripcion' id_curso=curso.id %}" >Vacantes disponibles - Inscribite !</a> -->
                   {% endcomment %}
-                  <a class="destacado con_vacantes" href="{% url 'inscripcion' curso.id %}" >Vacantes disponibles - Inscribite !</a>
+                  <a class="destacado con_vacantes" href="{% url 'contacto' 'INS' %}" >Vacantes disponibles - Inscribite !</a>
                 {% else %}
-                  <a class="destacado sin_vacantes" <a href="{% url 'contacto' 'CON' %}" >Contactanos si es de tu interés</a>            
+                  <a class="destacado sin_vacantes" href="{% url 'contacto' 'CON' %}" >Contactanos si es de tu interés</a>            
                 {% endif %}
               </div>
             </div>

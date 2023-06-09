@@ -1,8 +1,8 @@
 from django.db import models
 from datetime import datetime
 from django import utils
+from django.db.models import Sum
 from taller.validaciones import ValCelular, ValMail, ValEdadAlumno
-
 
 # Create your models here.
 class Curso (models.Model):
@@ -20,6 +20,12 @@ class Curso (models.Model):
                               )
     def __str__(self):
         return self.titulo
+    @property
+    def disponible(self):
+        cupos = Turno.objects.filter(curso_id=self.curso_id).values("cupo").aggregate(Sum('cupo'))
+        cupos = list(cupos.values())[0]
+        insc = Inscripcion.objects.filter(turno_id__curso_id=self.curso_id).count()
+        return (cupos > insc)
     class Meta:
         ordering = ["titulo"]
 
@@ -39,7 +45,8 @@ class CursoDescripcion (models.Model):
 
 MOT_Contacto = (('SUG', 'Sugerencia'),
                 ('CON', 'Consulta'),
-                ('SUS', 'Suscripción')
+                ('SUS', 'Suscripción'),
+                ('INS', 'Inscripción')
                ) 
 class Contacto (models.Model):
     motivo = models.CharField(max_length=3,verbose_name='Motivo', choices=MOT_Contacto,
