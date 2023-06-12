@@ -30,15 +30,20 @@
 }
 
 .texto {
-    background-color: #ffe4c4;
     padding: 1rem;
-    border: 2px solid rgb(95, 69, 39);
+    border: 2px solid rgb(160, 140, 118);
     /* border-style: outset; */
     border-bottom-width: 3px;
     border-right-width: 3px;
     border-radius: 5px;
     box-sizing: border-box;
     min-height:60vh;
+    /* fallback for old browsers */
+    background: bisque;  /*#ffe4c4; */
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(255,228,196, 1), rgb(228, 199, 166, 1));
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(255,228,196, 1), rgba(228, 199, 166, 1)) 
 }
 .img_responsive{
     /* width: 100%; */
