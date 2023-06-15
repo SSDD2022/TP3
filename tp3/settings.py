@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'taller',
     'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

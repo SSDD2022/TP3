@@ -1,10 +1,14 @@
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'cons_cursos_api',views.CursoViewSet,basename='cons_cursos_api')
 
 urlpatterns = [
-	path('',views.index,name="taller"),
+	 path('',views.index,name="taller"),
    path('galeria/',views.galeria,name="galeria"),
    path('cursos/',views.cursos,name="cursos"),
  #  re_path(r'^cursos/inscripcion/(?P<id_curso>[0-9]+)/$', views.inscripcion, name="inscripcion"),
@@ -28,6 +32,9 @@ urlpatterns = [
    path('cons_turno/<int:id>/', views.cons_turno, name = 'cons_turno'),
    path('cons_turno/', views.cons_turno, name = 'cons_turno'),
    path('baja_inscripcion/<int:id>/<str:origen>', views.baja_inscripcion, name = 'baja_inscripcion'),
+   path('',include(router.urls)),
+   path('api-auth/', include('rest_framework.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
