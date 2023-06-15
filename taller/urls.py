@@ -5,7 +5,7 @@ from . import views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'cons_cursos_api',views.CursoViewSet,basename='cons_cursos_api')
+router.register(r'cursos_api',views.CursoViewSet,basename='cursos_api')
 
 urlpatterns = [
 	 path('',views.index,name="taller"),
@@ -32,7 +32,7 @@ urlpatterns = [
    path('cons_turno/<int:id>/', views.cons_turno, name = 'cons_turno'),
    path('cons_turno/', views.cons_turno, name = 'cons_turno'),
    path('baja_inscripcion/<int:id>/<str:origen>', views.baja_inscripcion, name = 'baja_inscripcion'),
-   path('',include(router.urls)),
+   path('api/',include(router.urls)),
    path('api-auth/', include('rest_framework.urls')),
 
 ]
