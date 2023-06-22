@@ -23,6 +23,8 @@ class Curso (models.Model):
     @property
     def disponible(self):
         cupos = Turno.objects.filter(curso_id=self.curso_id).values("cupo").aggregate(Sum('cupo'))
+        if cupos is None:
+            return False;
         cupos = list(cupos.values())[0]
         insc = Inscripcion.objects.filter(turno_id__curso_id=self.curso_id).count()
         if insc is None:

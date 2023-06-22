@@ -85,11 +85,6 @@ def cons_alumno(request, id):
     context['listado'] = listado
     return render(request, 'taller/cons_alumno.html', context)
 
-def cons_cursos(request):
-    context = { 'pagina' : 'Consulta de cursos',
-              }
-    return render(request,'taller/cons_cursos.html',context)
-
 @login_required
 @user_passes_test(administrativo)
 def inscripcion(request, id_curso=None):
