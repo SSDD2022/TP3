@@ -23,8 +23,12 @@ class Curso (models.Model):
     @property
     def disponible(self):
         cupos = Turno.objects.filter(curso_id=self.curso_id).values("cupo").aggregate(Sum('cupo'))
+        if cupos is None:
+            return False;
         cupos = list(cupos.values())[0]
         insc = Inscripcion.objects.filter(turno_id__curso_id=self.curso_id).count()
+        if insc is None:
+            insc = cupos
         return (cupos > insc)
     class Meta:
         ordering = ["titulo"]
@@ -33,7 +37,7 @@ class CursoDescripcion (models.Model):
     # Primary key generada automaticamente
     class Meta:
         unique_together = ["curso_id", "posicion_id"]
-    curso_id = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    curso_id = models.ForeignKey(Curso, related_name='descripciones', on_delete=models.CASCADE)
     posicion_id = models.IntegerField(verbose_name='Posición',unique=False,auto_created=False,
                                      blank=False,null=False,help_text='Posición de la descripción',
                                      #validators=NotImplemented
@@ -43,7 +47,7 @@ class CursoDescripcion (models.Model):
                                    #validators=NotImplemented
                                    )
     def __str__(self):
-        return f'{self.curso_id.titulo} # {self.posicion_id}'
+        return f'{self.descripcion}'
     class Meta:
         ordering = ["curso_id","posicion_id"]
 

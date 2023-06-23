@@ -13,20 +13,26 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'galeria' %}">Galería</a>
       </li>
-      {% if user.is_authenticated and perms.taller.delete_curso %}
-      <li class="nav-item li-padre">
-        <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">Gestión<span class="caret"></span></a>
-        <ul class="dropdown-menu sub-menu" aria-labelledby="dropdownMenuButton" >
-          <li><a class="nav-item nav-link" href="{% url 'gestionar_alumnos' %}">Alumnos</a></li>
-          <li><a class="nav-item nav-link" href="{% url 'gestionar_contactos' %}">Contactos</a></li>
-          <li><a class="nav-item nav-link" href="{% url 'gestionar_turnos' %}">Turnos</a></li>
-          <li><a class="nav-item nav-link" href="/accounts/logout/">Logout</a></li>
-        </ul>
-      </li>
+      {% if user.is_authenticated %}
+          {% if perms.taller.delete_curso %}
+            <li class="nav-item li-padre">
+              <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">Gestión<span class="caret"></span></a>
+              <ul class="dropdown-menu sub-menu" aria-labelledby="dropdownMenuButton" >
+                <li><a class="nav-item nav-link" href="{% url 'gestionar_alumnos' %}">Alumnos</a></li>
+                <li><a class="nav-item nav-link" href="{% url 'gestionar_contactos' %}">Contactos</a></li>
+                <li><a class="nav-item nav-link" href="{% url 'gestionar_turnos' %}">Turnos</a></li>
+                <li><a class="nav-item nav-link" href="/accounts/logout/">Logout</a></li>
+              </ul>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/logout/">Logout</a>
+            </li>
+          {% endif %}
       {% else %}
-      <li class="nav-item">
-        <a class="nav-link" href="/accounts/login/">Login</a>
-      </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/login/">Login</a>
+          </li>
       {% endif %}
     </ul>
   </div>

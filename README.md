@@ -10,7 +10,7 @@ Exposiciones Parciales:
 √ Semana del 05/06 al 09/06 – Fecha 30 según Programa.
 
 Exposición Final
-• Semana del 19/06          - Fecha 17 según Programa. 
+• Semana del 23/06 o 27/06
 
 El PIG deberá ser un sitio web con temática a elección, orientado a la gestión y que cumpla con los siguientes puntos:
 
@@ -32,7 +32,7 @@ El PIG deberá ser un sitio web con temática a elección, orientado a la gesti�
 √ • Al menos un formulario debe poseer validaciones en el front-end y en el back-end
 √ • Debe haber al menos un formulario asociado a un template.
 √ • Debe haber al menos un formulario basado en clases.
-√ Debe haber al menos un formulario asociado a un modelo.
+√ • Debe haber al menos un formulario asociado a un modelo.
 
 √ 8. Deben existir al menos dos modelos distintos.
 

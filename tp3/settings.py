@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'taller',
     'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'taller'
+LOGOUT_REDIRECT_URL = 'taller'

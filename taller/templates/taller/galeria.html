@@ -7,8 +7,8 @@
 
 
 {% block header %}
-<h3 class="titulo_pagina">Galería de Trabajos</h3>
-<h5 class="subtitulo_pagina">Fotos de platos, tazas cucos, etc hecho por alumnos...</h5>
+<h3 class="titulo_pagina">Galería</h3>
+<h5 class="subtitulo_pagina">Fotos de los trabajos realizados por alumnos</h5><br>
 {% endblock %}
 
 {% block content %}
@@ -36,7 +36,7 @@
           <img src="{{ destacado.imagen.url }}" class="d-block w-100 h-100" alt="{{ destacado.titulo }}">
           <div class="carousel-caption d-none d-md-block">
             <h5>{{destacado.titulo}}</h5>
-            <p>Autor: {{destacado.autor.nombre}}</p>
+            <p>Autor: {{destacado.autor.nombre}} {{destacado.autor.apellido}}</p>
             <p>Curso: {{destacado.curso_id.titulo}}</p>
             <p>Año: {{destacado.fecha}}</p>
           </div>
@@ -46,7 +46,7 @@
           <img src="{{ destacado.imagen.url }}" class="d-block w-100 h-100" alt="{{ destacado.titulo }}">
           <div class="carousel-caption d-none d-md-block">
             <h5>{{destacado.titulo}}</h5>
-            <p>Autor: {{destacado.autor.nombre}}</p>
+            <p>Autor: {{destacado.autor.nombre}} {{destacado.autor.apellido}}</p>
             <p>Curso: {{destacado.curso_id.titulo}}</p>
             <p>Fecha: {{destacado.fecha}}</p>
           </div>
@@ -67,7 +67,7 @@
 </section>
 
 <section>
-  <h2>Mas obras de arte de nuestra comunidad...</h2>
+  <br><h5 class="subtitulo_pagina">Mas obras de arte de nuestra comunidad</h5><br>
   <div class="trabajos">
     {% for trabajo in trabajos %}
     <div class="card">

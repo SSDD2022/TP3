@@ -11,6 +11,9 @@ from taller.models import Curso, CursoDescripcion, Trabajo, Contacto, Turno, Alu
 from taller.forms import AltaAlumnoForm, AltaTurnoForm, AltaInscripcionForm, AltaInscripcionForm2
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from rest_framework import viewsets, permissions
+from taller import serializers
+
 
 # Para validar que el usuario pertenezca a cierto grupo
 def administrativo(user):
@@ -81,11 +84,6 @@ def cons_alumno(request, id):
     #.query
     context['listado'] = listado
     return render(request, 'taller/cons_alumno.html', context)
-
-def cons_cursos(request):
-    context = { 'pagina' : 'Consulta de cursos',
-              }
-    return render(request,'taller/cons_cursos.html',context)
 
 @login_required
 @user_passes_test(administrativo)
@@ -321,3 +319,9 @@ def baja_inscripcion(request, id, origen):
     else: #   if origen == 'T':
         url = reverse('cons_turno') + str(turno)
     return redirect(url) 
+
+
+class CursoViewSet(viewsets.ModelViewSet):
+    queryset = Curso.objects.all().order_by("titulo")
+    serializer_class = serializers.CursoSerializer2  # serializers.CursoSerializer
+    permission_classes = [permissions.IsAuthenticated]
